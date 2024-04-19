@@ -122,12 +122,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> displayList() {
 		// TODO Auto-generated method stub
-		return null;
+		return userrepo.findAll();
 	}
 
 	@Override
 	public Optional<User> getUser(String empId) {
 		// TODO Auto-generated method stub
+		if(userrepo.existsById(empId))
+		{
+			return userrepo.findById(empId);
+		}
 		return Optional.empty();
 	}
 
