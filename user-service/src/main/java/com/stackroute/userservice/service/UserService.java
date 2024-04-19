@@ -10,7 +10,7 @@ public interface UserService {
 	public String passwordGenerator();
 	public boolean updateUser(String empId,User user);
 	public boolean deleteUser(String empId);
-	public boolean sendMail(String emailId,String password);
+	public void sendMail(String emailId,String password);
 	public String encryptPassword(String password);
 	public List<User> displayList();
 	public Optional<User> getUser(String empId);

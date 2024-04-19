@@ -45,7 +45,6 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		String generatedPassword = RandomStringUtils.randomAlphanumeric(10);
 		return generatedPassword;
-		return null;
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean sendMail(String emailId, String password) {
+	public void sendMail(String emailId, String password) {
 		// TODO Auto-generated method stub
 		String subject="Login Credentials";
 		String htmlBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Template</title></head><body><h1>Welcome!</h1><p>Your email: "
@@ -89,7 +88,6 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 		
-		return false;
 	}
 
 	@Override
