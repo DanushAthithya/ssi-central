@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String passwordGenerator() {
 		// TODO Auto-generated method stub
+		String generatedPassword = RandomStringUtils.randomAlphanumeric(10);
+		return generatedPassword;
 		return null;
 	}
 
