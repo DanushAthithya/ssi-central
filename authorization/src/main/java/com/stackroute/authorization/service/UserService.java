@@ -5,5 +5,6 @@ import com.stackroute.authorization.model.User;
 public interface UserService{
     public User validateUser(User user);
     public User getUserByEmailId(String emailId);
+    public String encryptPassword(String password);
 }
 
