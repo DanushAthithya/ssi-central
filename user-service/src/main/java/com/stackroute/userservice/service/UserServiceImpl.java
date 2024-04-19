@@ -72,6 +72,23 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean sendMail(String emailId, String password) {
 		// TODO Auto-generated method stub
+		String subject="Login Credentials";
+		String htmlBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Template</title></head><body><h1>Welcome!</h1><p>Your email: "
+				+ emailId + "</p><p>Your password: " + password + "</p></body></html>";
+		MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
+
+        try {
+            helper.setFrom("danushathithya24@gmail.com");
+            helper.setTo(emailId);
+            helper.setSubject(subject);
+            helper.setText(htmlBody, true);
+            
+            emailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+		
 		return false;
 	}
 
