@@ -51,6 +51,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean updateUser(String empId, User user) {
 		// TODO Auto-generated method stub
+		if (userrepo.existsById(empId)) {
+			user.setPassword(userrepo.findById(empId).get().getPassword());
+			userrepo.save(user);
+			return true;
+		}
 		return false;
 	}
 
