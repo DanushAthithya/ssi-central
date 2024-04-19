@@ -10,6 +10,6 @@ public interface UserService{
     public String otpGenerator();
     public boolean forgetPassword(String emailId);
     public boolean otpVerifier(String emailId,String otp);
-    public boolean updatePassword(String emailId,String password);
+    public void updatePassword(String emailId,String password);
 }
 

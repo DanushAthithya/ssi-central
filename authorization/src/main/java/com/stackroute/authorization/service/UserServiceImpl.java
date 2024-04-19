@@ -140,9 +140,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean updatePassword(String emailId, String password) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'updatePassword'");
+	public void updatePassword(String emailId, String password) {
+		User user=this.getUserByEmailId(emailId);
+		user.setPassword(this.encryptPassword(password));
+		userRepository.save(user);
 	}
 
 
