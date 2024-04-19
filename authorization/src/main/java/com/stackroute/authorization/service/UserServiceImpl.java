@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -88,8 +89,28 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String otpGenerator() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'otpGenerator'");
+		int otpLength = 4;
+        
+        // Define the range of characters allowed in the OTP
+        String numbers = "0123456789";
+
+        // Use StringBuilder to efficiently append characters
+        StringBuilder sb = new StringBuilder();
+
+        // Random object to generate random indices
+        Random random = new Random();
+
+        // Generate the OTP
+        for (int i = 0; i < otpLength; i++) {
+            // Generate a random index between 0 and the length of the numbers string
+            int index = random.nextInt(numbers.length());
+
+            // Append the character at the random index to the OTP
+            sb.append(numbers.charAt(index));
+        }
+
+        // Convert StringBuilder to String and return the OTP
+        return sb.toString();
 	}
 
 	@Override
