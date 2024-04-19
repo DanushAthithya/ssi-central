@@ -1,17 +1,22 @@
 package com.stackroute.authorization.service;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 
 
 import com.stackroute.authorization.model.User;
 import com.stackroute.authorization.repository.UserRepository;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 
 @Service
@@ -62,9 +67,23 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void sendOtpMail(String email, String otp) {
+	public void sendOtpMail(String emailId, String otp) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'sendOtpMail'");
+		String subject="Forgot Password Verification";
+		String htmlBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Template</title></head><body><h1>Welcome!</h1><h2>OTP: <div style={background-color:yellow;}>" + otp + "</div></h2></body></html>";
+		MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
+
+        try {
+            helper.setFrom("danushathithya24@gmail.com");
+            helper.setTo(emailId);
+            helper.setSubject(subject);
+            helper.setText(htmlBody, true);
+            
+            emailSender.send(message);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 	}
 
 	@Override
