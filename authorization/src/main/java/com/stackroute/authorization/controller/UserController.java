@@ -33,14 +33,11 @@ public class UserController {
 	}
     @PostMapping("/login")
 	public ResponseEntity<?> validateUser(@RequestBody User user){
-		
-		User user1= userService.validateUser(user);
 		ResponseEntity<String> entity= new ResponseEntity<String>("Invalid Username/ Password",HttpStatus.NOT_FOUND);
-		if(user1!=null) {
+		if(userService.validateUser(user))
+		{
 			String token= getToken(user.getEmailId());
-			// entity=new ResponseEntity<String>("Login Success",HttpStatus.OK);
 			entity=new ResponseEntity<String>(token,HttpStatus.OK);
-		
 		}
 		return entity;
 	}

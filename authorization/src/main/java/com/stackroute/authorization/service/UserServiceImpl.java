@@ -5,7 +5,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+
 
 import com.stackroute.authorization.model.User;
 import com.stackroute.authorization.repository.UserRepository;
@@ -15,17 +18,14 @@ import com.stackroute.authorization.repository.UserRepository;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
-	// @Autowired
-    // private JavaMailSender emailSender;
+	@Autowired
+    private JavaMailSender emailSender;
 
     @Override
-	public User validateUser(User user) {
+	public boolean validateUser(User user) {
 		user.setPassword(this.encryptPassword(user.getPassword()));
-		// System.out.println("Pass "+user.getPassword());
 		Optional<User> optional =userRepository.findByEmailIdAndPassword(user.getEmailId(), user.getPassword());
-		User user1=optional.isPresent()?optional.get():null;
-		
-		return user1;
+		return optional.isPresent()?true:false;
 	}
 
 	@Override
@@ -59,6 +59,36 @@ public class UserServiceImpl implements UserService{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public void sendOtpMail(String email, String otp) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'sendOtpMail'");
+	}
+
+	@Override
+	public String otpGenerator() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'otpGenerator'");
+	}
+
+	@Override
+	public boolean forgetPassword(String emailId) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'forgetPassword'");
+	}
+
+	@Override
+	public boolean otpVerifier(String emailId, String otp) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'otpVerifier'");
+	}
+
+	@Override
+	public boolean updatePassword(String emailId, String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'updatePassword'");
 	}
 
 
