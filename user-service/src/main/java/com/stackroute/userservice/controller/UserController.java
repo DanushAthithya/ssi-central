@@ -42,5 +42,35 @@ public class UserController {
 		return new ResponseEntity<String>("No such user",HttpStatus.NOT_FOUND);
 	}
 	
+	@DeleteMapping("/user/{empId}")
+	public ResponseEntity<?> deleteUser(@PathVariable String empId)
+	{
+		if(userserv.deleteUser(empId))
+		{
+			return new ResponseEntity<String>("Deleted User",HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("No such user",HttpStatus.NOT_FOUND);
+	}
+	
+	@PutMapping("/user/{empId}")
+	public ResponseEntity<?> updateUser(@PathVariable String empId,@RequestBody User user)
+	{
+		if(userserv.updateUser(empId,user))
+		{
+			return new ResponseEntity<String>("Updated User",HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("No such user",HttpStatus.NOT_FOUND);
+	}
+	
+	@PostMapping("/user")
+	public ResponseEntity<?> updateUser(@RequestBody User user)
+	{
+		if(userserv.addUser(user))
+		{
+			return new ResponseEntity<String>("Added User",HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("No such user",HttpStatus.NOT_FOUND);
+	}
+	
 
 }
