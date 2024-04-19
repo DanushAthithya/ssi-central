@@ -3,9 +3,11 @@ package com.stackroute.authorization.service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Random;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -26,6 +28,9 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 	@Autowired
     private JavaMailSender emailSender;
+
+	private static java.util.Map<String, String> otpMap = new HashMap<>();
+
 
     @Override
 	public boolean validateUser(User user) {
@@ -115,8 +120,14 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean forgetPassword(String emailId) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'forgetPassword'");
+		Optional<User> user=userRepository.findByEmailId(emailId);
+		if(user.isPresent())
+		{
+			String otp=this.otpGenerator();
+			this.sendOtpMail(emailId, otp);
+			otpMap.put(emailId, otp);
+		}
+		return false;
 	}
 
 	@Override
