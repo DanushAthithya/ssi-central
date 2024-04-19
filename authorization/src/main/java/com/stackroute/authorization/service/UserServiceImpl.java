@@ -132,8 +132,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public boolean otpVerifier(String emailId, String otp) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'otpVerifier'");
+		if(otp.equals(otpMap.get(emailId)))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override
