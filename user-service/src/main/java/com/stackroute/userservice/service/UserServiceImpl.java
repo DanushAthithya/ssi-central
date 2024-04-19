@@ -62,6 +62,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean deleteUser(String empId) {
 		// TODO Auto-generated method stub
+		if (userrepo.existsById(empId)) {
+			userrepo.deleteById(empId);
+			return true;
+		}
 		return false;
 	}
 
