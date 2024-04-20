@@ -1,0 +1,68 @@
+package com.stackroute.ssimanagement.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.stackroute.ssimanagement.model.SSI;
+import com.stackroute.ssimanagement.service.SSIService;
+
+@RestController
+@RequestMapping("api/v1/ssi")
+public class SSIController {
+    @Autowired
+    private SSIService ssiService;
+
+    @PostMapping("/add/")
+    public ResponseEntity<?> addSSI(@RequestBody SSI ssi) {
+        SSI newSSI = ssiService.addSSI(ssi);
+        ResponseEntity<SSI> entity = new ResponseEntity<SSI>(newSSI, HttpStatus.CREATED);
+        return entity;
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<?> displaySSIList() {
+        List<SSI> SSIList = ssiService.displaySSIList();
+        ResponseEntity<List<SSI>> entity = new ResponseEntity<List<SSI>>(SSIList, HttpStatus.OK);
+        return entity;
+    }
+
+    @PutMapping("/update/{instructionId}")
+	public ResponseEntity<String> updateSSI(@PathVariable int instructionId,@RequestBody SSI ssi){
+        boolean update = ssiService.updateSSI(instructionId,ssi);
+        if(!update){
+            ResponseEntity<String> entity = new ResponseEntity<>("SSI with ID " + instructionId + " not found", HttpStatus.NOT_FOUND);
+            return entity;
+        }
+		else{
+            ResponseEntity<String> entity = new ResponseEntity<>("SSI with ID " + instructionId + " updated successfully", HttpStatus.OK);
+            return entity;
+        }
+	}
+
+    @DeleteMapping("/delete/{instructionId}")
+	public ResponseEntity<?> deleteSSI(@PathVariable int instructionId){
+            ssiService.deleteSSI(instructionId);
+            ResponseEntity<?> entity = new ResponseEntity<>("SSI with ID " + instructionId + " updated successfully", HttpStatus.OK);
+            return entity;
+	}
+
+    @GetMapping("/check/instructionId")
+    public ResponseEntity<?> checkSSIById(@PathVariable int instructionId) {
+        SSI ssi = ssiService.checkSSIById(instructionId);
+        ResponseEntity<?> entity = new ResponseEntity<String>("Invalid SSI ID", HttpStatus.NOT_FOUND);
+        if (ssi != null)
+            entity = new ResponseEntity<SSI>(ssi, HttpStatus.CREATED);
+        return entity;
+    }
+}
