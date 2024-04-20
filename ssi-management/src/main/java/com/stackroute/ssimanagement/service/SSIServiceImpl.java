@@ -27,22 +27,17 @@ public class SSIServiceImpl implements SSIService{
 	}
 
 	@Override
-	public boolean updateSSI(int instructionId, SSI ssi) {
-		// TODO Auto-generated method stub
-		boolean isUpdated=false;
-		Optional<SSI> optional = ssiRespository.findById(instructionId);
-		if(optional.isPresent()) {
-			SSI ssi1=optional.get();
-			ssi.setInstructionId(instructionId);
+	public boolean updateSSI(SSI ssi) {
+		if(ssiRespository.existsById(ssi.getInstructionId()))
+		{
 			ssiRespository.save(ssi);
-			isUpdated=true;
+			return true;
 		}
-		return isUpdated;
+		return false;
 	}
 
 	@Override
 	public boolean deleteSSI(int instructionId) {
-		// TODO Auto-generated method stub
 		if (ssiRespository.existsById(instructionId)) {
 			ssiRespository.deleteById(instructionId);
 			return true;
@@ -52,19 +47,16 @@ public class SSIServiceImpl implements SSIService{
 
 	@Override
 	public boolean sendMailSSI(String counterPartyEmail, SSI ssi) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public List<SSI> filterSSI() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Optional<SSI> checkSSIById(int instructionId) {
-		// TODO Auto-generated method stub
 		if(ssiRespository.existsById(instructionId))
 		{
 			return ssiRespository.findById(instructionId);
