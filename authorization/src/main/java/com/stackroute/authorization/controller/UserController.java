@@ -54,7 +54,7 @@ public class UserController {
 		}
 	}
 
-	@PostMapping("/otpVerift/{otp}")
+	@PostMapping("/otpVerify/{otp}")
 	public ResponseEntity<?> otpVerify(@RequestBody String emailId,@PathVariable String otp) {
 		if(userService.otpVerifier(emailId, otp))
 		{
