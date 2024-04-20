@@ -65,6 +65,12 @@ public class UserController {
 		}
 	}
 	
+	@PutMapping("/updatePassword/{password}")
+	public ResponseEntity<?> updatePassword(@PathVariable String password,@RequestBody String emailId) {
+		userService.updatePassword(emailId, password);
+		return new ResponseEntity<String>("Updated Password",HttpStatus.OK);
+	}
+	
 	 
 	// @GetMapping("/{emailId}")
 	// public ResponseEntity<?> getUserByEmail(@PathVariable String emailId) {
