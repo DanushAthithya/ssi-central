@@ -7,13 +7,10 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.Random;
 
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-
 
 import com.stackroute.authorization.model.User;
 import com.stackroute.authorization.repository.UserRepository;
@@ -126,6 +123,7 @@ public class UserServiceImpl implements UserService{
 			String otp=this.otpGenerator();
 			this.sendOtpMail(emailId, otp);
 			otpMap.put(emailId, otp);
+			return true;
 		}
 		return false;
 	}
