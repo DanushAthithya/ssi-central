@@ -54,7 +54,16 @@ public class UserController {
 		}
 	}
 
-	
+	@PostMapping("/otpVerift/{otp}")
+	public ResponseEntity<?> otpVerify(@RequestBody String emailId,@PathVariable String otp) {
+		if(userService.otpVerifier(emailId, otp))
+		{
+			return new ResponseEntity<String>("Valid OTP",HttpStatus.OK);
+		}
+		else{
+			return new ResponseEntity<String>("Invalid OTP",HttpStatus.NOT_ACCEPTABLE);
+		}
+	}
 	
 	 
 	// @GetMapping("/{emailId}")
