@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
