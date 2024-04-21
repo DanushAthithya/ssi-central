@@ -1,8 +1,10 @@
 package com.stackroute.ssimanagement.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,4 +67,17 @@ public class SSIController {
             entity = new ResponseEntity<SSI>(ssi, HttpStatus.CREATED);
         return entity;
     }
+
+    @GetMapping("/filter/byDateRange/{startDate}/{endDate}")
+public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
+    List<SSI> ssiList = ssiService.filterSSIByDateRange(startDate, endDate);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found between the given dates", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+
 }
