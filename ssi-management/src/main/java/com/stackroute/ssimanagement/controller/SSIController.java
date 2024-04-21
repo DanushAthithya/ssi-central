@@ -1,5 +1,6 @@
 package com.stackroute.ssimanagement.controller;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
@@ -70,13 +71,37 @@ public class SSIController {
     }
 
     @GetMapping("/filter/byDateRange/{startDate}/{endDate}")
-public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
+    public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
     List<SSI> ssiList = ssiService.filterSSIByDate(startDate, endDate);
     ResponseEntity<?> entity;
     if (!ssiList.isEmpty()) {
         entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
     } else {
         entity = new ResponseEntity<>("No SSIs found between the given dates", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+
+    @GetMapping("/filter/byAmountRange/{minAmount}/{maxAmount}")
+    public ResponseEntity<?> filterSSIByAmountRange(@PathVariable BigDecimal minAmount, @PathVariable BigDecimal maxAmount) {
+    List<SSI> ssiList = ssiService.filterSSIByAmount(minAmount, maxAmount);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found between the given amount range", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+
+    @GetMapping("/filter/byCounterParty/{counterPartyName}")
+    public ResponseEntity<?> filterSSIByCounterParty(@PathVariable String counterPartyName) {
+    List<SSI> ssiList = ssiService.filterSSIByCounterPartyName(counterPartyName);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found for the given counterparty name", HttpStatus.NOT_FOUND);
     }
     return entity;
 }
