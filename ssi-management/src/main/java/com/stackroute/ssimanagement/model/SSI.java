@@ -59,4 +59,6 @@ public class SSI {
 	private String updatedByName;
 	@Column(nullable = false)
 	private String reference;
+	@Column(nullable = false)
+	private String userId;
 }

@@ -1,7 +1,8 @@
 package com.stackroute.ssimanagement.controller;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,7 +42,7 @@ public class SSIController {
 
     @PutMapping("/update/{instructionId}")
 	public ResponseEntity<String> updateSSI(@PathVariable int instructionId,@RequestBody SSI ssi){
-        boolean update = ssiService.updateSSI(instructionId,ssi);
+        boolean update = ssiService.updateSSI(ssi);
         if(!update){
             ResponseEntity<String> entity = new ResponseEntity<>("SSI with ID " + instructionId + " not found", HttpStatus.NOT_FOUND);
             return entity;
@@ -61,16 +62,16 @@ public class SSIController {
 
     @GetMapping("/check/instructionId")
     public ResponseEntity<?> checkSSIById(@PathVariable int instructionId) {
-        SSI ssi = ssiService.checkSSIById(instructionId);
+        Optional<SSI> ssi = ssiService.checkSSIById(instructionId);
         ResponseEntity<?> entity = new ResponseEntity<String>("Invalid SSI ID", HttpStatus.NOT_FOUND);
-        if (ssi != null)
-            entity = new ResponseEntity<SSI>(ssi, HttpStatus.CREATED);
+        if (ssi.isPresent())
+            entity = new ResponseEntity<SSI>(ssi.get(), HttpStatus.CREATED);
         return entity;
     }
 
     @GetMapping("/filter/byDateRange/{startDate}/{endDate}")
 public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
-    List<SSI> ssiList = ssiService.filterSSIByDateRange(startDate, endDate);
+    List<SSI> ssiList = ssiService.filterSSIByDate(startDate, endDate);
     ResponseEntity<?> entity;
     if (!ssiList.isEmpty()) {
         entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
