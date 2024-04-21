@@ -5,7 +5,10 @@ import java.util.Optional;
 
 import com.stackroute.ssimanagement.model.SSI;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 25c44c1b12868cb7de3d5cb3420ff695f3f24b1a
 public interface SSIService {
 	public SSI addSSI(SSI ssi);
 	public List<SSI> displaySSIList();
