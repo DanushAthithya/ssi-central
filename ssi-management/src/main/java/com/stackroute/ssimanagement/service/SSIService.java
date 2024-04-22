@@ -19,4 +19,7 @@ public interface SSIService {
 	public List<SSI> filterSSIByDate(Date startDate, Date endDate);
 	public List<SSI> filterSSIByCounterPartyName(String counterPartyName);
 	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount);
+	public List<SSI> filterSSIByAssetType(String assetType);
+	public List<SSI> filterSSIByAssetRange(int minAssetNo,int maxAssetNo);
+	public List<SSI> filterSSIByTransactionType(String transactionType);
 }

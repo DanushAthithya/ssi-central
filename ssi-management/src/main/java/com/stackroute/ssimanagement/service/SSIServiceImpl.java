@@ -162,4 +162,19 @@ public class SSIServiceImpl implements SSIService{
         }
 	}
 
+	@Override
+	public List<SSI> filterSSIByAssetType(String assetType) {
+		return ssiRespository.findByAssetType(assetType);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAssetRange(int minAssetNo,int maxAssetNo) {
+		return ssiRespository.findByNumberOfAsset(minAssetNo,maxAssetNo);
+	}
+
+	@Override
+	public List<SSI> filterSSIByTransactionType(String transactionType) {
+		return ssiRespository.findByTransactionType(transactionType);
+	}
+
 }
