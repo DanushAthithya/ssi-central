@@ -1,7 +1,7 @@
 package com.stackroute.ssimanagement.controller;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +61,7 @@ public class SSIController {
             return entity;
 	}
 
-    @GetMapping("/check/instructionId")
+    @GetMapping("/check/{instructionId}")
     public ResponseEntity<?> checkSSIById(@PathVariable int instructionId) {
         Optional<SSI> ssi = ssiService.checkSSIById(instructionId);
         ResponseEntity<?> entity = new ResponseEntity<String>("Invalid SSI ID", HttpStatus.NOT_FOUND);

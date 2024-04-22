@@ -1,7 +1,7 @@
 package com.stackroute.ssimanagement.repository;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
