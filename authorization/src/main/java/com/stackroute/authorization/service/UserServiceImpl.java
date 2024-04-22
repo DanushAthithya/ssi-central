@@ -82,7 +82,6 @@ public class UserServiceImpl implements UserService{
             helper.setTo(emailId);
             helper.setSubject(subject);
             helper.setText(htmlBody, true);
-            
             emailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();

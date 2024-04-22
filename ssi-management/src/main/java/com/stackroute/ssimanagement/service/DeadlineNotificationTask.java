@@ -33,7 +33,7 @@ public class DeadlineNotificationTask {
         List<SSI> ssis = ssiRepository.findWithApproachingDeadlines(currentDate, approachingDate);
         for (SSI ssi : ssis) {
             String htmlBody = generateHtmlBody(ssi, approachingDate);
-            ssiService.sendDeadlineNotification(ssi.getCounterPartyEmail(), htmlBody);
+            ssiService.sendDeadlineNotification(ssi.getCounterPartyEmail(),ssi.getUserEmailId(), htmlBody);
         }
     }
 
