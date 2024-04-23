@@ -28,4 +28,6 @@ public interface SSIRepository extends JpaRepository<SSI, Integer>{
     List<SSI> findByNumberOfAsset(int minAssetNo,int maxAssetNo);
 
     List<SSI> findByTransactionType(String transactionType);
+    
+    ByteArrayInputStream exportDetailsToPDF(int instructionId);
 }

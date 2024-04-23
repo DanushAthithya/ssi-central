@@ -176,5 +176,10 @@ public class SSIServiceImpl implements SSIService{
 	public List<SSI> filterSSIByTransactionType(String transactionType) {
 		return ssiRespository.findByTransactionType(transactionType);
 	}
+	@Override
+    	public ByteArrayInputStream exportDetailsToPDF(int instructionId) throws IOException {
+        	PDFExportService pdfExportService = new PDFExportService(this);
+        	return pdfExportService.exportDetailsToPDF(ssiId);
+    }
 
 }

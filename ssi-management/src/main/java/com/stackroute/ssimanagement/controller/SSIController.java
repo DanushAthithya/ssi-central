@@ -141,6 +141,21 @@ public class SSIController {
     }
     return entity;
 }
+    @GetMapping("/export-pdf/{instructionId}")
+    public ResponseEntity<byte[]> exportPdf(@PathVariable int instructionId) {
+        try {
+            ByteArrayInputStream byteArrayInputStream = ssiService.exportDetailsToPDF(instructionId);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("filename", "ssi_details.pdf");
+            byte[] bytes = new byte[byteArrayInputStream.available()];
+            byteArrayInputStream.read(bytes);
+            return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }
