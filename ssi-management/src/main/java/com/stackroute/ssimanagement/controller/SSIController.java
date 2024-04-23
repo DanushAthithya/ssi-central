@@ -1,5 +1,6 @@
 package com.stackroute.ssimanagement.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.ssimanagement.model.SSI;
+import com.stackroute.ssimanagement.service.CSVGeneratorService;
+import com.stackroute.ssimanagement.service.PDFGeneratorService;
 import com.stackroute.ssimanagement.service.SSIService;
 
 @RestController
@@ -26,6 +29,12 @@ import com.stackroute.ssimanagement.service.SSIService;
 public class SSIController {
     @Autowired
     private SSIService ssiService;
+
+    @Autowired
+    private CSVGeneratorService csvGeneratorService;
+
+    @Autowired
+    private PDFGeneratorService pdfGeneratorService;
 
     @PostMapping("/add/")
     public ResponseEntity<?> addSSI(@RequestBody SSI ssi) {
@@ -141,19 +150,26 @@ public class SSIController {
     }
     return entity;
 }
-    @GetMapping("/export-pdf/{instructionId}")
-    public ResponseEntity<byte[]> exportPdf(@PathVariable int instructionId) {
+   
+@PostMapping("/generate-pdf")
+public ResponseEntity<byte[]> generatePDF(@RequestBody String instructionIds) {
+    try {
+        byte[] pdfBytes = pdfGeneratorService.generatePDF(instructionIds.split("&"));
+        return new ResponseEntity<byte[]>(pdfBytes,HttpStatus.OK);
+    } catch (IOException e) {
+        e.printStackTrace();
+        return new ResponseEntity<>("Failed to generate PDF.".getBytes(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+    @PostMapping("/generate-csv")
+    public ResponseEntity<byte[]> generateCSV(@RequestBody String instructionIds) {
         try {
-            ByteArrayInputStream byteArrayInputStream = ssiService.exportDetailsToPDF(instructionId);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("filename", "ssi_details.pdf");
-            byte[] bytes = new byte[byteArrayInputStream.available()];
-            byteArrayInputStream.read(bytes);
-            return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+            byte[] csvBytes = csvGeneratorService.generateCSV(instructionIds.split("&"));
+            return new ResponseEntity<byte[]>(csvBytes,HttpStatus.OK);
         } catch (IOException e) {
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Failed to generate CSV.".getBytes(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

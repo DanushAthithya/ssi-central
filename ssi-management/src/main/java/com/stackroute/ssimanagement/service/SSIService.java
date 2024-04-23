@@ -22,5 +22,4 @@ public interface SSIService {
 	public List<SSI> filterSSIByAssetType(String assetType);
 	public List<SSI> filterSSIByAssetRange(int minAssetNo,int maxAssetNo);
 	public List<SSI> filterSSIByTransactionType(String transactionType);
-	public ByteArrayInputStream exportDetailsToPDF(int instructionId);
 }
