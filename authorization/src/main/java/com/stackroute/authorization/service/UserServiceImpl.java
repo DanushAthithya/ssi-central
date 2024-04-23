@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.authorization.exception.InvalidEmailId;
 import com.stackroute.authorization.model.User;
 import com.stackroute.authorization.repository.UserRepository;
 
@@ -30,16 +31,28 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-	public boolean validateUser(User user) {
+	public boolean validateUser(User user) throws InvalidEmailId  {
+		
 		user.setPassword(this.encryptPassword(user.getPassword()));
+		System.out.println(user.getPassword());
 		Optional<User> optional =userRepository.findByEmailIdAndPassword(user.getEmailId(), user.getPassword());
+		if(userRepository.findByEmailId(user.getEmailId()).isEmpty()){
+			throw new InvalidEmailId("Invalid EmailId");
+		}
 		return optional.isPresent()?true:false;
 	}
 
 	@Override
-	public User getUserByEmailId(String emailId) {
+	public User getUserByEmailId(String emailId) throws InvalidEmailId {
 		Optional<User> optional =userRepository.findByEmailId(emailId);
-		return optional.isPresent()?optional.get():null;
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		else{
+			throw new InvalidEmailId("Invalid EmailId");
+		}
+		
+		// return optional.isPresent()?optional.get():null;
 	}
 
 	@Override
@@ -116,7 +129,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean forgetPassword(String emailId) {
+	public boolean forgetPassword(String emailId) throws InvalidEmailId{
 		Optional<User> user=userRepository.findByEmailId(emailId);
 		if(user.isPresent())
 		{
@@ -124,8 +137,9 @@ public class UserServiceImpl implements UserService{
 			this.sendOtpMail(emailId, otp);
 			otpMap.put(emailId, otp);
 			return true;
+		}else{
+			throw new InvalidEmailId("Invaid Email Id");
 		}
-		return false;
 	}
 
 	@Override
@@ -138,8 +152,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void updatePassword(String emailId, String password) {
-		User user=this.getUserByEmailId(emailId);
+	public void updatePassword(String emailId, String password) throws InvalidEmailId  {
+		System.out.println("Email"+emailId);
+		User user=this.getUserByEmailId(emailId);	
 		user.setPassword(this.encryptPassword(password));
 		userRepository.save(user);
 	}

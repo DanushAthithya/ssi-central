@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stackroute.authorization.exception.InvalidEmailId;
 import com.stackroute.authorization.model.User;
 import com.stackroute.authorization.service.UserService;
 
@@ -24,7 +25,7 @@ public class UserController {
 	private UserService userService;
 	
     @PostMapping("/login")
-	public ResponseEntity<?> validateUser(@RequestBody User user){
+	public ResponseEntity<?> validateUser(@RequestBody User user) throws InvalidEmailId{
 		ResponseEntity<?> entity= new ResponseEntity<String>("Invalid Username/ Password",HttpStatus.NOT_FOUND);
 		if(userService.validateUser(user))
 		{
@@ -35,7 +36,7 @@ public class UserController {
 	}
 
 	@PostMapping("/forgetPassword/{emailId}")                                    //it is just used to verify if emailId belongs to a user and sends otp to email
-	public ResponseEntity<?> forgetPassword(@PathVariable String emailId)
+	public ResponseEntity<?> forgetPassword(@PathVariable String emailId) throws InvalidEmailId
 	{
 		if(userService.forgetPassword(emailId))
 		{
@@ -58,7 +59,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/updatePassword/{password}")                                     //updates the password
-	public ResponseEntity<?> updatePassword(@PathVariable String password,@RequestBody String emailId) {
+	public ResponseEntity<?> updatePassword(@PathVariable String password,@RequestBody String emailId) throws InvalidEmailId {
 		userService.updatePassword(emailId, password);
 		return new ResponseEntity<String>("Updated Password",HttpStatus.OK);
 	}
