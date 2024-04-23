@@ -47,4 +47,4 @@ public class DeadlineNotificationTask {
                 "<p>Final Deadline Date: " + deadlineDate + "</p>" +
                 "</body></html>";
     }
-}
+
