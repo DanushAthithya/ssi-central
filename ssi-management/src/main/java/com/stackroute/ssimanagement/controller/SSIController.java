@@ -106,4 +106,56 @@ public class SSIController {
     return entity;
 }
 
+    @GetMapping("/filter/byAssetType/{assetType}")
+    public ResponseEntity<?> filterSSIByAssetType(@PathVariable String assetType) {
+    List<SSI> ssiList = ssiService.filterSSIByAssetType(assetType);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found for the given asset type", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+
+    @GetMapping("/filter/byAssetRange/{minAssetNo}/{maxAssetNo}")
+    public ResponseEntity<?> filterSSIByAssetRange(@PathVariable int minAssetNo, @PathVariable int maxAssetNo) {
+    List<SSI> ssiList = ssiService.filterSSIByAssetRange(minAssetNo, maxAssetNo);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found within the specified asset range", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+
+    @GetMapping("/filter/byTransactionType/{transactionType}")
+    public ResponseEntity<?> filterSSIByTransactionType(@PathVariable String transactionType) {
+    List<SSI> ssiList = ssiService.filterSSIByTransactionType(transactionType);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found for the given transaction type", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+    @GetMapping("/export-pdf/{instructionId}")
+    public ResponseEntity<byte[]> exportPdf(@PathVariable int instructionId) {
+        try {
+            ByteArrayInputStream byteArrayInputStream = ssiService.exportDetailsToPDF(instructionId);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("filename", "ssi_details.pdf");
+            byte[] bytes = new byte[byteArrayInputStream.available()];
+            byteArrayInputStream.read(bytes);
+            return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

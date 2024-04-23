@@ -5,10 +5,11 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SSI {
 	@Id
-	@Generated
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int instructionId;
 	@Column(nullable = false)
 	private String counterPartyAccountNumber;
@@ -54,11 +55,9 @@ public class SSI {
 	@Column(nullable = false)
 	private String beneficiaryAccountName;
 	@Column(nullable = false)
-	private String createdByName;
-	@Column(nullable = false)
-	private String updatedByName;
-	@Column(nullable = false)
 	private String reference;
 	@Column(nullable = false)
 	private String userId;
+	@Column(nullable=false)
+	private String userEmailId;
 }

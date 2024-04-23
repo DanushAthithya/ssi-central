@@ -99,8 +99,8 @@ public class SSIServiceImpl implements SSIService{
 		"<tr><td>Intermediary Account Number:</td><td>" + ssi.getIntermediaryAccountNumber() + "</td></tr>" +
 		"<tr><td>Beneficiary Account Number:</td><td>" + ssi.getBeneficiaryAccountNumber() + "</td></tr>" +
 		"<tr><td>Beneficiary Account Name:</td><td>" + ssi.getBeneficiaryAccountName() + "</td></tr>" +
-		"<tr><td>Created By Name:</td><td>" + ssi.getCreatedByName() + "</td></tr>" +
-		"<tr><td>Updated By Name:</td><td>" + ssi.getUpdatedByName() + "</td></tr>" +
+		"<tr><td>User ID:</td><td>" + ssi.getUserId() + "</td></tr>" +
+		"<tr><td>User EmailID:</td><td>" + ssi.getUserEmailId() + "</td></tr>" +
 		"<tr><td>Reference:</td><td>" + ssi.getReference() + "</td></tr>" +
 		"</table>" +
 		"</body>" +
@@ -144,7 +144,7 @@ public class SSIServiceImpl implements SSIService{
 	}
 
 	@Override
-	public void sendDeadlineNotification(String counterPartyEmail,String htmlBody) {
+	public void sendDeadlineNotification(String counterPartyEmail,String userEmailId,String htmlBody) {
 		String subject="SSI Deadline Notification";
 		MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
@@ -152,6 +152,7 @@ public class SSIServiceImpl implements SSIService{
         try {
             helper.setFrom("danushathithya24@gmail.com");
             helper.setTo(counterPartyEmail);
+			helper.addTo(userEmailId);
             helper.setSubject(subject);
             helper.setText(htmlBody, true);
             
@@ -160,5 +161,25 @@ public class SSIServiceImpl implements SSIService{
             e.printStackTrace();
         }
 	}
+
+	@Override
+	public List<SSI> filterSSIByAssetType(String assetType) {
+		return ssiRespository.findByAssetType(assetType);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAssetRange(int minAssetNo,int maxAssetNo) {
+		return ssiRespository.findByNumberOfAsset(minAssetNo,maxAssetNo);
+	}
+
+	@Override
+	public List<SSI> filterSSIByTransactionType(String transactionType) {
+		return ssiRespository.findByTransactionType(transactionType);
+	}
+	@Override
+    	public ByteArrayInputStream exportDetailsToPDF(int instructionId) throws IOException {
+        	PDFExportService pdfExportService = new PDFExportService(this);
+        	return pdfExportService.exportDetailsToPDF(ssiId);
+    }
 
 }

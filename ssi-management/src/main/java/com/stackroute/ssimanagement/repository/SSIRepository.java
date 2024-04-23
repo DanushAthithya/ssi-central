@@ -22,4 +22,12 @@ public interface SSIRepository extends JpaRepository<SSI, Integer>{
     List<SSI> findByCounterPartyNameIgnoreCase(String counterPartyName);
 
     List<SSI> findByAmountBetween(BigDecimal minAmount, BigDecimal maxAmount);
+
+    List<SSI> findByAssetType(String assetType);
+
+    List<SSI> findByNumberOfAsset(int minAssetNo,int maxAssetNo);
+
+    List<SSI> findByTransactionType(String transactionType);
+    
+    ByteArrayInputStream exportDetailsToPDF(int instructionId);
 }
