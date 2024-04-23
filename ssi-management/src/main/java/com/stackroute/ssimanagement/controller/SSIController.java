@@ -152,7 +152,7 @@ public class SSIController {
 }
    
 @PostMapping("/generate-pdf")
-public ResponseEntity<byte[]> generatePDF(@RequestBody String instructionIds) {
+public ResponseEntity<?> generatePDF(@RequestBody String instructionIds) {
     try {
         byte[] pdfBytes = pdfGeneratorService.generatePDF(instructionIds.split("&"));
         return new ResponseEntity<byte[]>(pdfBytes,HttpStatus.OK);
@@ -163,7 +163,7 @@ public ResponseEntity<byte[]> generatePDF(@RequestBody String instructionIds) {
 }
 
     @PostMapping("/generate-csv")
-    public ResponseEntity<byte[]> generateCSV(@RequestBody String instructionIds) {
+    public ResponseEntity<?> generateCSV(@RequestBody String instructionIds) {
         try {
             byte[] csvBytes = csvGeneratorService.generateCSV(instructionIds.split("&"));
             return new ResponseEntity<byte[]>(csvBytes,HttpStatus.OK);
