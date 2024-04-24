@@ -11,6 +11,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.stackroute.ssimanagement.exception.InvalidAmountException;
+import com.stackroute.ssimanagement.exception.InvalidDateRangeException;
+import com.stackroute.ssimanagement.exception.InvalidEmailId;
+import com.stackroute.ssimanagement.exception.InvalidSSIId;
 import com.stackroute.ssimanagement.model.SSI;
 import com.stackroute.ssimanagement.repository.SSIRepository;
 
@@ -27,7 +31,7 @@ public class SSIServiceImpl implements SSIService{
     private JavaMailSender emailSender;
 	
 	@Override
-	public SSI addSSI(SSI ssi) {
+	public SSI addSSI(SSI ssi) throws InvalidEmailId {
 		this.sendMailSSI(ssi.getCounterPartyEmail(), ssi);
 		return ssiRespository.save(ssi);
 	}
@@ -39,26 +43,29 @@ public class SSIServiceImpl implements SSIService{
 	}
 
 	@Override
-	public boolean updateSSI(SSI ssi) {
+	public boolean updateSSI(SSI ssi) throws InvalidSSIId {
 		if(ssiRespository.existsById(ssi.getInstructionId()))
 		{
 			ssiRespository.save(ssi);
 			return true;
+		}else{
+			throw new InvalidSSIId("Invalid SSI Id");
 		}
-		return false;
+		// return false;
 	}
 
 	@Override
-	public boolean deleteSSI(int instructionId) {
+	public boolean deleteSSI(int instructionId) throws InvalidSSIId {
 		if (ssiRespository.existsById(instructionId)) {
 			ssiRespository.deleteById(instructionId);
 			return true;
+		}else{
+			throw new InvalidSSIId("Invalid SSI Id");
 		}
-		return false;
 	}
 
 	@Override
-	public void sendMailSSI(String counterPartyEmail, SSI ssi) {
+	public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId {
 		String subject="Generated SSI";
 		String htmlBody = "<html>" +
 		"<head>" +
@@ -117,34 +124,45 @@ public class SSIServiceImpl implements SSIService{
             
             emailSender.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace();
+			e.printStackTrace();
+			throw new InvalidEmailId("Invalid Email Id - Counld sent mail");
         }
 	}
 
 	@Override
-	public List<SSI> filterSSIByDate(Date startDate, Date endDate) {
-		return ssiRespository.filterSSIByDate(startDate, endDate);
+	public List<SSI> filterSSIByDate(Date startDate, Date endDate) throws InvalidDateRangeException  {
+		if (endDate.before(startDate)) {
+			throw new InvalidDateRangeException("End date cannot be before start date");
+		}
+			return ssiRespository.filterSSIByDate(startDate, endDate);
+		
 	}
 	@Override
 	public List<SSI> filterSSIByCounterPartyName(String counterPartyName) {
         return ssiRespository.findByCounterPartyNameIgnoreCase(counterPartyName);
 	}
 	@Override
-	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount) {
+	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount) throws InvalidAmountException {
+		if((maxAmount.compareTo(minAmount))>0){
+			throw new InvalidAmountException("Invalid Amount");
+		}
 		return ssiRespository.findByAmountBetween(minAmount,maxAmount);
 	}
 
 	@Override
-	public Optional<SSI> checkSSIById(int instructionId) {
+	public Optional<SSI> checkSSIById(int instructionId) throws InvalidSSIId {
 		if(ssiRespository.existsById(instructionId))
 		{
 			return ssiRespository.findById(instructionId);
 		}
-		return Optional.empty();
+		// return Optional.empty();
+		else{
+			throw new InvalidSSIId("Invaild SSI id");
+		}
 	}
 
 	@Override
-	public void sendDeadlineNotification(String counterPartyEmail,String userEmailId,String htmlBody) {
+	public void sendDeadlineNotification(String counterPartyEmail,String userEmailId,String htmlBody) throws InvalidEmailId {
 		String subject="SSI Deadline Notification";
 		MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
@@ -159,6 +177,7 @@ public class SSIServiceImpl implements SSIService{
             emailSender.send(message);
         } catch (MessagingException e) {
             e.printStackTrace();
+			throw new InvalidEmailId("Couldn't Send mail- Invalid Email");
         }
 	}
 
