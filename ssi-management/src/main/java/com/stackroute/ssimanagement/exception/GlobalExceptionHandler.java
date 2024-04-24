@@ -17,4 +17,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 			ResponseEntity<?> entity= new ResponseEntity<String>(exception.getMessage(),HttpStatus.CONFLICT);
 			return entity;
 		}
+		@ExceptionHandler(InvalidDateRangeException.class)
+		public ResponseEntity<?> exceptionHandlerInvalidDateRange(InvalidDateRangeException exception){
+			ResponseEntity<?> entity= new ResponseEntity<String>(exception.getMessage(),HttpStatus.CONFLICT);
+			return entity;
+		}
+		@ExceptionHandler(InvalidAmountException.class)
+		public ResponseEntity<?> exceptionHandlerInvalidAmount(InvalidAmountException exception){
+			ResponseEntity<?> entity= new ResponseEntity<String>(exception.getMessage(),HttpStatus.CONFLICT);
+			return entity;
+		}
 }
