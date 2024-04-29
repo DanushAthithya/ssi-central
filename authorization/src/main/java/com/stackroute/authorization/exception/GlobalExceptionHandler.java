@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 	public class GlobalExceptionHandler {
 		@ExceptionHandler(InvalidEmailId.class)
-		public ResponseEntity<?> exceptionHandlerInvalidProductId(InvalidEmailId exception){
+		public ResponseEntity<?> exceptionHandlerInvalidEmailId(InvalidEmailId exception){
 			ResponseEntity<?> entity= new ResponseEntity<String>(exception.getMessage(),HttpStatus.CONFLICT);
 			return entity;
 		}

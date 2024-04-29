@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stackroute.ssimanagement.exception.InvalidAmountException;
+import com.stackroute.ssimanagement.exception.InvalidDate;
+import com.stackroute.ssimanagement.exception.InvalidDateRangeException;
+import com.stackroute.ssimanagement.exception.InvalidEmailId;
+import com.stackroute.ssimanagement.exception.InvalidSSIId;
 import com.stackroute.ssimanagement.model.SSI;
 import com.stackroute.ssimanagement.service.CSVGeneratorService;
 import com.stackroute.ssimanagement.service.PDFGeneratorService;
@@ -38,7 +43,7 @@ public class SSIController {
     private PDFGeneratorService pdfGeneratorService;
 
     @PostMapping("/add/")
-    public ResponseEntity<?> addSSI(@RequestBody SSI ssi) {
+    public ResponseEntity<?> addSSI(@RequestBody SSI ssi) throws InvalidEmailId {
         SSI newSSI = ssiService.addSSI(ssi);
         ResponseEntity<SSI> entity = new ResponseEntity<SSI>(newSSI, HttpStatus.CREATED);
         return entity;
@@ -52,7 +57,7 @@ public class SSIController {
     }
 
     @PutMapping("/update/{instructionId}")
-	public ResponseEntity<String> updateSSI(@PathVariable int instructionId,@RequestBody SSI ssi){
+	public ResponseEntity<String> updateSSI(@PathVariable int instructionId,@RequestBody SSI ssi) throws InvalidSSIId{
         boolean update = ssiService.updateSSI(ssi);
         if(!update){
             ResponseEntity<String> entity = new ResponseEntity<>("SSI with ID " + instructionId + " not found", HttpStatus.NOT_FOUND);
@@ -65,20 +70,30 @@ public class SSIController {
 	}
 
     @DeleteMapping("/delete/{instructionId}")
-	public ResponseEntity<?> deleteSSI(@PathVariable int instructionId){
+	public ResponseEntity<?> deleteSSI(@PathVariable int instructionId) throws InvalidSSIId{
             ssiService.deleteSSI(instructionId);
             ResponseEntity<?> entity = new ResponseEntity<>("SSI with ID " + instructionId + " updated successfully", HttpStatus.OK);
             return entity;
 	}
 
+<<<<<<< HEAD
     @GetMapping("/check/{instructionIds}")
     public ResponseEntity<?> checkSSIByIds(@PathVariable String instructionIds) {
         
         return new ResponseEntity<>(ssiService.checkSSIByIds(instructionIds.split("&")),HttpStatus.OK);
+=======
+    @GetMapping("/check/{instructionId}")
+    public ResponseEntity<?> checkSSIById(@PathVariable int instructionId) throws InvalidSSIId {
+        Optional<SSI> ssi = ssiService.checkSSIById(instructionId);
+        ResponseEntity<?> entity = new ResponseEntity<String>("Invalid SSI ID", HttpStatus.NOT_FOUND);
+        if (ssi.isPresent())
+            entity = new ResponseEntity<SSI>(ssi.get(), HttpStatus.CREATED);
+        return entity;
+>>>>>>> 8353ab1563917a03a6c44f81d8f7fc810934b596
     }
 
     @GetMapping("/filter/byDateRange/{startDate}/{endDate}")
-    public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
+    public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws InvalidDate, InvalidDateRangeException {
     List<SSI> ssiList = ssiService.filterSSIByDate(startDate, endDate);
     ResponseEntity<?> entity;
     if (!ssiList.isEmpty()) {
@@ -90,7 +105,7 @@ public class SSIController {
 }
 
     @GetMapping("/filter/byAmountRange/{minAmount}/{maxAmount}")
-    public ResponseEntity<?> filterSSIByAmountRange(@PathVariable BigDecimal minAmount, @PathVariable BigDecimal maxAmount) {
+    public ResponseEntity<?> filterSSIByAmountRange(@PathVariable BigDecimal minAmount, @PathVariable BigDecimal maxAmount) throws InvalidAmountException {
     List<SSI> ssiList = ssiService.filterSSIByAmount(minAmount, maxAmount);
     ResponseEntity<?> entity;
     if (!ssiList.isEmpty()) {
