@@ -1,7 +1,11 @@
 package com.stackroute.ssimanagement.service;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -20,6 +24,11 @@ public class PDFGeneratorService {
     private SSIRepository ssirepo;
 
     public byte[] generatePDF(String[] instructionIds) throws IOException {
+        // Convert String array to List of integers
+        List<Integer> ids = Arrays.stream(instructionIds)
+                                   .map(Integer::parseInt)
+                                   .collect(Collectors.toList());
+
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
              PDDocument document = new PDDocument()) {
 
@@ -30,18 +39,15 @@ public class PDFGeneratorService {
                 contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(100, 700);
-                contentStream.showText("SSI Data");
-                contentStream.endText();
-
-                contentStream.beginText();
+                contentStream.showText("SSI Data:");
                 contentStream.setFont(PDType1Font.HELVETICA, 10);
 
                 // Write SSI Data to PDF
                 int yPosition = 680;
-                for (String instructionId : instructionIds) {
-                    Optional<SSI> ssi = ssirepo.findById(Integer.parseInt(instructionId));
-                    if (ssi.isPresent()) {
-                        SSI ssiData = ssi.get();
+                for (Integer instructionId : ids) {
+                    Optional<SSI> ssiOptional = ssirepo.findById(instructionId);
+                    if (ssiOptional.isPresent()) {
+                        SSI ssiData = ssiOptional.get();
                         contentStream.newLineAtOffset(0, -20);
                         contentStream.showText("Instruction ID: " + ssiData.getInstructionId());
                         contentStream.newLineAtOffset(0, -20);
@@ -56,6 +62,7 @@ public class PDFGeneratorService {
                         contentStream.showText("Transaction Type: " + ssiData.getTransactionType());
                         contentStream.newLineAtOffset(0, -20);
                         contentStream.showText("Status: " + ssiData.getStatus());
+                        // Repeat for other fields...
                         contentStream.newLineAtOffset(0, -20);
                         contentStream.showText("Asset Details: " + ssiData.getAssetDetails());
                         contentStream.newLineAtOffset(0, -20);
@@ -85,7 +92,7 @@ public class PDFGeneratorService {
                         contentStream.newLineAtOffset(0, -20);
                         contentStream.showText("User Email ID: " + ssiData.getUserEmailId());
 
-                        yPosition -= 380;
+                        yPosition -= 20;
                     }
                 }
 

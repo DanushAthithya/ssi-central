@@ -2,6 +2,7 @@ package com.stackroute.ssimanagement.service;
 
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -135,12 +136,21 @@ public class SSIServiceImpl implements SSIService{
 	}
 
 	@Override
-	public Optional<SSI> checkSSIById(int instructionId) {
-		if(ssiRespository.existsById(instructionId))
+	public List<SSI> checkSSIByIds(String instructionIds[]) {
+		List<SSI> ssis=new ArrayList<>();
+		for(String instructionIdd:instructionIds)
 		{
-			return ssiRespository.findById(instructionId);
+			int instructionId=Integer.parseInt(instructionIdd);
+			if(ssiRespository.existsById(instructionId))
+			{
+				Optional<SSI> ssi=ssiRespository.findById(instructionId);
+				if(ssi.isPresent())
+				{
+					ssis.add(ssi.get());
+				}
+			}
 		}
-		return Optional.empty();
+		return ssis;
 	}
 
 	@Override
@@ -177,6 +187,9 @@ public class SSIServiceImpl implements SSIService{
 		return ssiRespository.findByTransactionType(transactionType);
 	}
 	
+	public List<SSI> filterSSIByStatus(String status) {
+		return ssiRespository.findByStatus(status);
+	}
 	
 
 }

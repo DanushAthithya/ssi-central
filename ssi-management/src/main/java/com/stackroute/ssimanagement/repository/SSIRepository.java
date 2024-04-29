@@ -30,4 +30,6 @@ public interface SSIRepository extends JpaRepository<SSI, Integer> {
     List<SSI> findByNumberOfAsset(@Param("minAssetNo") int minAssetNo, @Param("maxAssetNo") int maxAssetNo);
 
     List<SSI> findByTransactionType(String transactionType);
+
+    List<SSI> findByStatus(String status);
 }
