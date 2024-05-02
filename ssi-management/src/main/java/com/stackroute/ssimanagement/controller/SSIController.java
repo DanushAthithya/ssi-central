@@ -76,20 +76,10 @@ public class SSIController {
             return entity;
 	}
 
-<<<<<<< HEAD
     @GetMapping("/check/{instructionIds}")
-    public ResponseEntity<?> checkSSIByIds(@PathVariable String instructionIds) {
+    public ResponseEntity<?> checkSSIByIds(@PathVariable String instructionIds) throws InvalidSSIId {
         
         return new ResponseEntity<>(ssiService.checkSSIByIds(instructionIds.split("&")),HttpStatus.OK);
-=======
-    @GetMapping("/check/{instructionId}")
-    public ResponseEntity<?> checkSSIById(@PathVariable int instructionId) throws InvalidSSIId {
-        Optional<SSI> ssi = ssiService.checkSSIById(instructionId);
-        ResponseEntity<?> entity = new ResponseEntity<String>("Invalid SSI ID", HttpStatus.NOT_FOUND);
-        if (ssi.isPresent())
-            entity = new ResponseEntity<SSI>(ssi.get(), HttpStatus.CREATED);
-        return entity;
->>>>>>> 8353ab1563917a03a6c44f81d8f7fc810934b596
     }
 
     @GetMapping("/filter/byDateRange/{startDate}/{endDate}")
