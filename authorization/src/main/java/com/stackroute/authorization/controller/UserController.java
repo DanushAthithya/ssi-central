@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +20,8 @@ import com.stackroute.authorization.service.UserService;
 import io.jsonwebtoken.Jwts;
 
 @RestController
-@RequestMapping("/api/v1/")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/v1")
 public class UserController {
     @Autowired
 	private UserService userService;
@@ -29,11 +31,22 @@ public class UserController {
 		ResponseEntity<?> entity= new ResponseEntity<String>("Invalid Username/ Password",HttpStatus.NOT_FOUND);
 		if(userService.validateUser(user))
 		{
-			String token= getToken(user.getEmailId());
+			String role= userService.getUserByEmailId(user.getEmailId()).getRole();
+			String token= getToken(user.getEmailId(),role);
 			entity=new ResponseEntity<String>(token,HttpStatus.OK);
 		}
 		return entity;
 	}
+	@PostMapping("/getuser")
+	public ResponseEntity<?> getUserData(@RequestBody User user) throws InvalidEmailId{
+		ResponseEntity<?> entity= new ResponseEntity<String>("Invalid Username/ Password",HttpStatus.NOT_FOUND);
+		if(userService.validateUser(user))
+		{
+			entity=new ResponseEntity<User>(userService.getUserByEmailId(user.getEmailId()),HttpStatus.OK);
+		}
+		return entity;
+	}
+
 
 	@PostMapping("/forgetPassword/{emailId}")                                    //it is just used to verify if emailId belongs to a user and sends otp to email
 	public ResponseEntity<?> forgetPassword(@PathVariable String emailId) throws InvalidEmailId
@@ -65,8 +78,8 @@ public class UserController {
 	}
 
 
-    private String getToken(String emailId) {
-		return Jwts.builder().setSubject(emailId).setIssuedAt(new Date()).signWith(io.jsonwebtoken.SignatureAlgorithm.HS256,"BATON-SUCCESS").compact();
+    private String getToken(String emailId, String role) {
+		return Jwts.builder().setSubject(emailId).claim("role", role).setIssuedAt(new Date()).signWith(io.jsonwebtoken.SignatureAlgorithm.HS256,"BATON-SUCCESS").compact();
 	}
 	
 

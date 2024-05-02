@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.stackroute.userservice.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 	
 	@Autowired
@@ -71,6 +73,25 @@ public class UserController {
 		}
 		return new ResponseEntity<String>("No such user",HttpStatus.NOT_FOUND);
 	}
+
+	@GetMapping("/user/filter/byEmpId/{empIds}")
+	public ResponseEntity<?> filterByEmpIds(@PathVariable String empIds)
+	{
+		String empIdArr[]=empIds.split("&");
+		return new ResponseEntity<List<User>>(userserv.filterByEmpId(empIdArr),HttpStatus.OK);
+	}
 	
+	@GetMapping("/user/filter/byEmailId/{emailIds}")
+	public ResponseEntity<?> filterByEmailIds(@PathVariable String emailIds)
+	{
+		String emailIdArr[]=emailIds.split("&");
+		return new ResponseEntity<List<User>>(userserv.filterByEmailId(emailIdArr),HttpStatus.OK);
+	}
+
+	@GetMapping("/user/filter/byRole/{role}")
+	public ResponseEntity<?> filterByRole(@PathVariable String role)
+	{
+		return new ResponseEntity<List<User>>(userserv.filterByRole(role),HttpStatus.OK);
+	}
 
 }

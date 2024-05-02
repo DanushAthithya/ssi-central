@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stackroute.ssimanagement.exception.InvalidAmountException;
-import com.stackroute.ssimanagement.exception.InvalidDate;
 import com.stackroute.ssimanagement.exception.InvalidDateRangeException;
 import com.stackroute.ssimanagement.exception.InvalidEmailId;
 import com.stackroute.ssimanagement.exception.InvalidSSIId;
@@ -28,6 +27,7 @@ import com.stackroute.ssimanagement.model.SSI;
 import com.stackroute.ssimanagement.service.CSVGeneratorService;
 import com.stackroute.ssimanagement.service.PDFGeneratorService;
 import com.stackroute.ssimanagement.service.SSIService;
+
 
 @RestController
 @RequestMapping("api/v1/ssi")
@@ -83,7 +83,7 @@ public class SSIController {
     }
 
     @GetMapping("/filter/byDateRange/{startDate}/{endDate}")
-    public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws InvalidDate, InvalidDateRangeException {
+    public ResponseEntity<?> filterSSIByDateRange(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) throws InvalidDateRangeException {
     List<SSI> ssiList = ssiService.filterSSIByDate(startDate, endDate);
     ResponseEntity<?> entity;
     if (!ssiList.isEmpty()) {
@@ -118,11 +118,7 @@ public class SSIController {
     public ResponseEntity<?> filterSSIByAssetType(@PathVariable String assetType) {
     List<SSI> ssiList = ssiService.filterSSIByAssetType(assetType);
     ResponseEntity<?> entity;
-    if (!ssiList.isEmpty()) {
-        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
-    } else {
-        entity = new ResponseEntity<>("No SSIs found for the given asset type", HttpStatus.NOT_FOUND);
-    }
+    entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
     return entity;
 }
 

@@ -14,4 +14,7 @@ public interface UserService {
 	public String encryptPassword(String password);
 	public List<User> displayList();
 	public Optional<User> getUser(String empId);
+	public List<User> filterByEmpId(String empIds[]);
+	public List<User> filterByEmailId(String emaildIds[]);
+	public List<User> filterByRole(String role);
 }
