@@ -118,11 +118,7 @@ public class SSIController {
     public ResponseEntity<?> filterSSIByAssetType(@PathVariable String assetType) {
     List<SSI> ssiList = ssiService.filterSSIByAssetType(assetType);
     ResponseEntity<?> entity;
-    if (!ssiList.isEmpty()) {
-        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
-    } else {
-        entity = new ResponseEntity<>("No SSIs found for the given asset type", HttpStatus.NOT_FOUND);
-    }
+    entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
     return entity;
 }
 

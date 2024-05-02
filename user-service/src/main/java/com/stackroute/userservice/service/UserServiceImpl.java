@@ -3,6 +3,7 @@ package com.stackroute.userservice.service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -131,6 +132,37 @@ public class UserServiceImpl implements UserService {
 			return userrepo.findById(empId);
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public List<User> filterByEmpId(String[] empIds) {
+		List<User> userList=new ArrayList<>();
+		for(String empId:empIds)
+		{
+			if(userrepo.existsById(empId))
+			{
+				userList.add(userrepo.findById(empId).get());
+			}
+		}
+		return userList;
+	}
+
+	@Override
+	public List<User> filterByEmailId(String[] emaildIds) {
+		List<User> userList=new ArrayList<>();
+		for(String emailId:emaildIds)
+		{
+			if(userrepo.findByEmailId(emailId).size()>0)
+			{
+				userList.add(userrepo.findByEmailId(emailId).get(0));
+			}
+		}
+		return userList;
+	}
+
+	@Override
+	public List<User> filterByRole(String role) {
+		return userrepo.findByRole(role);
 	}
 
 }
