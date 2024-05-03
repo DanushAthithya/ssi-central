@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+    .line-container {
+      width: 500px; /* Adjust width for smaller screens */
+      margin-left: 69vw;
+    }
+  }

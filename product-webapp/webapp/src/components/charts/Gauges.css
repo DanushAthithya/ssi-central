@@ -1,0 +1,21 @@
+
+  /* Media query for iPad Mini */
+  @media (max-width: 768px) {
+    .indiv-gauges-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 30vw;
+        height: 30vh;
+        /* margin: auto; */
+    }
+        .gauges-container {
+        margin-left: 0vw;
+        /* margin-bottom: 70px; */
+      }
+    .gauge { 
+         width: 5px;
+        height: 5px;
+      } 
+  }
+  

@@ -1,0 +1,39 @@
+#visualize-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust height as needed */
+  }
+
+  /* ChartButton.css */
+
+.chart-button {
+  position: absolute; /* Position the button relative to its containing element */
+  top: 20px; /* Adjust top position */
+  right: 10px; /* Adjust right position */
+  padding: 10px 10px; /* Add padding */
+  background-color: red; /* Set background color */
+  color: white; /* Set text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 10px; /* Adjust font size */
+  font-weight: bold; /* Set font weight to bold */
+  transition: background-color 0.3s; /* Add transition effect */
+}
+
+.chart-button:hover {
+  background-color: #0056b3; /* Change background color on hover */
+}
+
+@media (max-width: 768px) {
+  .chart-container-bar{
+    width: 90%; /* Adjust container width for smaller screens */
+    margin: auto; /* Center the chart container */
+  }
+
+  .chart-container-bar canvas {
+    width: 100% !important; /* Make sure the canvas fills the container */
+    height: auto !important;
+  }
+}
