@@ -151,7 +151,7 @@ public class SSIServiceImpl implements SSIService{
 	}
 
 	@Override
-	public List<SSI> checkSSIByIds(String instructionIds[]) {
+	public List<SSI> checkSSIByIds(String instructionIds[]) throws InvalidSSIId{
 		List<SSI> ssis=new ArrayList<>();
 		for(String instructionIdd:instructionIds)
 		{

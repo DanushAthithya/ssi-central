@@ -31,11 +31,22 @@ public class UserController {
 		ResponseEntity<?> entity= new ResponseEntity<String>("Invalid Username/ Password",HttpStatus.NOT_FOUND);
 		if(userService.validateUser(user))
 		{
-			String token= getToken(user.getEmailId());
+			String role= userService.getUserByEmailId(user.getEmailId()).getRole();
+			String token= getToken(user.getEmailId(),role);
 			entity=new ResponseEntity<String>(token,HttpStatus.OK);
 		}
 		return entity;
 	}
+	@PostMapping("/getuser")
+	public ResponseEntity<?> getUserData(@RequestBody User user) throws InvalidEmailId{
+		ResponseEntity<?> entity= new ResponseEntity<String>("Invalid Username/ Password",HttpStatus.NOT_FOUND);
+		if(userService.validateUser(user))
+		{
+			entity=new ResponseEntity<User>(userService.getUserByEmailId(user.getEmailId()),HttpStatus.OK);
+		}
+		return entity;
+	}
+
 
 	@PostMapping("/forgetPassword/{emailId}")                                    //it is just used to verify if emailId belongs to a user and sends otp to email
 	public ResponseEntity<?> forgetPassword(@PathVariable String emailId) throws InvalidEmailId
@@ -67,8 +78,8 @@ public class UserController {
 	}
 
 
-    private String getToken(String emailId) {
-		return Jwts.builder().setSubject(emailId).setIssuedAt(new Date()).signWith(io.jsonwebtoken.SignatureAlgorithm.HS256,"BATON-SUCCESS").compact();
+    private String getToken(String emailId, String role) {
+		return Jwts.builder().setSubject(emailId).claim("role", role).setIssuedAt(new Date()).signWith(io.jsonwebtoken.SignatureAlgorithm.HS256,"BATON-SUCCESS").compact();
 	}
 	
 
