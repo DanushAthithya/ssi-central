@@ -1,0 +1,13 @@
+/* Media query for iPad Mini */
+@media (max-width: 768px) {
+    .chart-container-pie {
+        /* margin-left: 100px; */
+      width:50vw; 
+      /* height: 90vh; */
+      /* margin; Center the chart container */
+    }
+  
+   
+
+  }
+  
