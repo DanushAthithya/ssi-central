@@ -1,3 +1,5 @@
+
+
 package com.stackroute.ssimanagement.service;
 
 import java.io.ByteArrayOutputStream;
@@ -32,19 +34,23 @@ public class PDFGeneratorService {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
              PDDocument document = new PDDocument()) {
 
-            PDPage page = new PDPage();
-            document.addPage(page);
+            // Initialize a boolean variable to track whether it's the first iteration
+            boolean firstIteration = true;
 
-            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
-                contentStream.beginText();
-                contentStream.newLineAtOffset(100, 700);
-                contentStream.showText("SSI Data:");
-                contentStream.setFont(PDType1Font.HELVETICA, 10);
+            for (Integer instructionId : ids) {
+                // Create a new page for each iteration
+                PDPage page = new PDPage();
+                document.addPage(page);
 
-                // Write SSI Data to PDF
-                int yPosition = 680;
-                for (Integer instructionId : ids) {
+                try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                    // Set font and position for the content stream
+                    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(100, 700);
+                    contentStream.showText("SSI Data:");
+                    contentStream.setFont(PDType1Font.HELVETICA, 10);
+
+                    // Retrieve SSI data and write to PDF
                     Optional<SSI> ssiOptional = ssirepo.findById(instructionId);
                     if (ssiOptional.isPresent()) {
                         SSI ssiData = ssiOptional.get();
@@ -91,15 +97,20 @@ public class PDFGeneratorService {
                         contentStream.showText("User ID: " + ssiData.getUserId());
                         contentStream.newLineAtOffset(0, -20);
                         contentStream.showText("User Email ID: " + ssiData.getUserEmailId());
-
-                        yPosition -= 20;
                     }
+
+                    // End and close the content stream
+                    contentStream.endText();
                 }
 
-                contentStream.endText();
+                // Update the boolean variable after the first iteration
+                firstIteration = false;
             }
+
+            // Save the document to output stream
             document.save(outputStream);
             return outputStream.toByteArray();
         }
     }
 }
+

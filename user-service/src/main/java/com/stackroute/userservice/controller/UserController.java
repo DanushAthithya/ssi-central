@@ -21,7 +21,7 @@ import com.stackroute.userservice.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000",allowedHeaders = "*")
 public class UserController {
 	
 	@Autowired
