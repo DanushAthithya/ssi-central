@@ -10,6 +10,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Divider, Drawer, MenuItem, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import logo from "../../Images/GenySys__2_-removebg-preview.png";
+import LogoutIcon from '@mui/icons-material/Logout';
+import AddIcon from '@mui/icons-material/Add';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import ListIcon from '@mui/icons-material/List';
 // import logo from './logo2.png';
 
 const logoStyle = {
@@ -162,16 +166,16 @@ function AdminNavbar({ mode, toggleColorMode }) {
                    </IconButton>
                  </Box>
                  <MenuItem onClick={() => window.location.replace("/adminHome/createUser")}>
-                   Add User
+                   <AddIcon style={{marginRight:'15px'}}/>Add User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
                    Update User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
-                   User List
+                   <ListIcon style={{marginRight:'15px'}}/>User List
                  </MenuItem>
                  {/* Add Logout Button */}
-                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                 <MenuItem onClick={handleLogout}><LogoutIcon style={{marginRight:'15px'}}/>Logout</MenuItem>
                  <Divider />
                </Box>
              </Drawer>
