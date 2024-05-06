@@ -64,10 +64,43 @@ function UpdateForm() {
   };
 
   useEffect(() => {
-    // Fetch form data or set defaults
-    const SSI=JSON.parse(localStorage.getItem("ssi"));
-    setFormData({...SSI})
+    try {
+      const SSI = JSON.parse(localStorage.getItem("ssi"))[0];
+      if (SSI) {
+        // Data is available in local storage
+        setFormData({ ...SSI });
+      } else {
+        // Data is not available or invalid, set default values
+        setFormData({
+          instructionId: '',
+          counterPartyAccountNumber: '',
+          counterPartyName: '',
+          counterPartyEmail: '',
+          swiftCode: '',
+          transactionType: '',
+          status: '',
+          assetDetails: '',
+          assetType: '',
+          numberOfAssets: '',
+          createdDate: '',
+          deadlineDate: '',
+          amountCurrencyType: '',
+          amount: '',
+          intermediaryAccountNumber: '',
+          beneficiaryAccountNumber: '',
+          beneficiaryAccountName: '',
+          createdByName: '',
+          reference: ''
+        });
+      }
+    } catch (error) {
+      // Error handling for parsing or other errors
+      console.error("Error parsing SSI from local storage:", error);
+      // Set default values or handle the error as appropriate
+    }
   }, []);
+  
+  
 
   const stepContent = (step) => {
     switch (step) {

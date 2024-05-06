@@ -200,14 +200,14 @@ public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId
 	}
 
 	@Override
-	public List<SSI> checkSSIByIds(String instructionIds[]) throws InvalidSSIId{
+	public List<SSI> checkSSIByIds(String instructionIds[],String userEmailId) throws InvalidSSIId{
 		List<SSI> ssis=new ArrayList<>();
 		for(String instructionIdd:instructionIds)
 		{
 			int instructionId=Integer.parseInt(instructionIdd);
 			if(ssiRespository.existsById(instructionId))
 			{
-				Optional<SSI> ssi=ssiRespository.findById(instructionId);
+				Optional<SSI> ssi=ssiRespository.findByIdAndUserEmailId(instructionId,userEmailId);
 				if(ssi.isPresent())
 				{
 					ssis.add(ssi.get());
@@ -279,17 +279,17 @@ public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId
 
 	@Override
 	public List<SSI> filterSSIByAssetType(String assetType, String userEmailId) {
-		return ssiRespository.findByAssetType(assetType);
+		return ssiRespository.findByAssetTypeAndUserEmailId(assetType, userEmailId);
 	}
 
 	@Override
 	public List<SSI> filterSSIByAssetRange(int minAssetNo, int maxAssetNo, String userEmailId) {
-		return ssiRespository.findByNumberOfAsset(minAssetNo,maxAssetNo);
+		return ssiRespository.findByNumberOfAssetAndUserEmailId(minAssetNo, maxAssetNo, userEmailId);
 	}
 
 	@Override
 	public List<SSI> filterSSIByTransactionType(String transactionType, String userEmailId) {
-		return ssiRespository.findByTransactionType(transactionType);
+		return ssiRespository.findByTransactionTypeAndUserEmailId(transactionType, userEmailId);
 	}
 
 	@Override
@@ -300,6 +300,26 @@ public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId
 	@Override
 	public List<SSI> displaySSIListByEmailId(String emailId) {
 		return ssiRespository.findByUserEmailId(emailId);
+	}
+
+	@Override
+	public List<SSI> checkSSIByIds(String[] instructionIds) throws InvalidSSIId {
+		// TODO Auto-generated method stub
+		List<SSI> ssis=new ArrayList<>();
+		for(String instructionIdd:instructionIds)
+		{
+			int instructionId=Integer.parseInt(instructionIdd);
+			if(ssiRespository.existsById(instructionId))
+			{
+				Optional<SSI> ssi=ssiRespository.findById(instructionId);
+				if(ssi.isPresent())
+				{
+					ssis.add(ssi.get());
+				}
+			}
+		}
+		return ssis;
+		
 	}
 
 }

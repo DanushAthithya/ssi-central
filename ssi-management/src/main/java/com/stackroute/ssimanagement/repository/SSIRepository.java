@@ -3,6 +3,7 @@ package com.stackroute.ssimanagement.repository;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -30,6 +31,9 @@ public interface SSIRepository extends JpaRepository<SSI, Integer> {
 
     List<SSI> findByAssetType(String assetType);
     List<SSI> findByAssetTypeAndUserEmailId(String assetType,String userEmailId);
+
+    @Query("SELECT s FROM SSI s WHERE s.id = :instructionId AND s.userEmailId = :userEmailId")
+    Optional<SSI> findByIdAndUserEmailId(int instructionId, String userEmailId);
 
     @Query("SELECT s FROM SSI s WHERE s.numberOfAsset BETWEEN :minAssetNo AND :maxAssetNo")
     List<SSI> findByNumberOfAsset(@Param("minAssetNo") int minAssetNo, @Param("maxAssetNo") int maxAssetNo);

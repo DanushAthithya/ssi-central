@@ -83,6 +83,12 @@ public class SSIController {
             return entity;
 	}
 
+    @PostMapping("/check/{instructionIds}")
+    public ResponseEntity<?> checkSSIByIds(@PathVariable String instructionIds,@RequestBody String userEmailId) throws InvalidSSIId {
+        
+        return new ResponseEntity<>(ssiService.checkSSIByIds(instructionIds.split("&"),userEmailId),HttpStatus.OK);
+    }
+
     @GetMapping("/check/{instructionIds}")
     public ResponseEntity<?> checkSSIByIds(@PathVariable String instructionIds) throws InvalidSSIId {
         

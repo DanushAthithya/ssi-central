@@ -18,6 +18,7 @@ public interface SSIService {
 	public boolean deleteSSI(int instructionId) throws InvalidSSIId;
 	public void sendMailSSI(String counterPartyEmail,SSI ssi) throws InvalidEmailId;	//To send notification mail to the counterparty about the deadline of transacrtion
 	public void sendDeadlineNotification(String counterPartyEmail,String userEMailId,String htmlBody) throws InvalidEmailId;
+	public List<SSI> checkSSIByIds(String instructionIds[],String userEmailId) throws InvalidSSIId;
 	public List<SSI> checkSSIByIds(String instructionIds[]) throws InvalidSSIId;
 	public List<SSI> filterSSIByDate(Date startDate, Date endDate) throws  InvalidDateRangeException;
 	public List<SSI> filterSSIByDate(Date startDate, Date endDate,String userEmailId) throws  InvalidDateRangeException;
