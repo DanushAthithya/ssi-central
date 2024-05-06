@@ -5,7 +5,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
-
+import EditNoteIcon from '@mui/icons-material/EditNote';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from '@mui/icons-material/Add';
 import ListIcon from '@mui/icons-material/List';
@@ -61,7 +61,7 @@ function AdminNavbar({ mode, toggleColorMode }) {
           mt: 2,
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="false">
           {/* Hamburger Menu */}
 
           <Toolbar

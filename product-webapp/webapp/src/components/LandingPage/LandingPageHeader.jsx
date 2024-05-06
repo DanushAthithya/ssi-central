@@ -54,7 +54,7 @@ function LandingPageHeader({ mode, toggleColorMode }) {
           mt: 2,
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="false">
           <Toolbar
             variant="regular"
             sx={(theme) => ({
