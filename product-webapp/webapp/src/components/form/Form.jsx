@@ -487,19 +487,17 @@ function Form() {
     }
   };
 
+
   return (
-    <Container
-      maxWidth="md"
-      style={{
-        marginTop: "150px",
-        textAlign: "center",
-        border: "1px solid #ccc",
-        borderRadius: "4px",
-        backgroundColor: "white",
-        boxShadow: "0 4px 8px rgba(10,0,0,10)", // Adjusted the opacity for the shadow
-        padding: "20px",
-      }}
-    >
+    <Container maxWidth="md" style={{
+      marginTop: '50px',
+      textAlign: 'center',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      backgroundColor: 'white',
+      boxShadow: '0 4px 8px rgba(10,0,0,10)',
+      padding: '20px'
+    }}>
       <div className="Form">
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
@@ -508,32 +506,16 @@ function Form() {
             </Step>
           ))}
         </Stepper>
-        <form onSubmit={handleSubmit}>
+        <form>
           {stepContent(activeStep)}
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="primary"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button
-              disabled={activeStep === steps.length - 1}
-              onClick={handleNext}
-              color="primary"
-            >
-              Next
-            </Button>
-            <Button
-              disabled={activeStep !== steps.length - 1}
-              type="submit"
-              color="primary"
-            >
-              Finish
-            </Button>
+          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Button color="primary" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>Back</Button>
+            <Box sx={{ flex: '1 1 auto' }} />
+            {activeStep < steps.length - 1 && (
+              <Button onClick={handleNext} color="primary">
+                Next
+              </Button>
+            )}
           </Box>
         </form>
       </div>
