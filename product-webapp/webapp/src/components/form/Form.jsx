@@ -27,7 +27,6 @@ function Form() {
   const steps = getSteps();
 
   const [formData, setFormData] = useState({
-    instructionId: "",
     counterPartyAccountNumber: "",
     counterPartyName: "",
     counterPartyEmail: "",
@@ -36,7 +35,7 @@ function Form() {
     status: "",
     assetDetails: "",
     assetType: "",
-    numberOfAssets: "",
+    numberOfAsset: "",
     createdDate: "",
     deadlineDate: "",
     amountCurrencyType: "",
@@ -133,21 +132,7 @@ function Form() {
                 marginBottom: "1vh",
               }}
             >
-              <TextField
-                label="Instruction Id"
-                name="instructionId"
-                value={formData.instructionId}
-                onChange={handleInputChange}
-                required
-                error={validationErrors.instructionId}
-                helperText={
-                  validationErrors.instructionId
-                    ? "Please enter only integers"
-                    : ""
-                }
-                sx={{ width: "50%", marginRight: "1vh" }}
-                InputProps={{ style: { color: "black" } }}
-              />
+              
               <TextField
                 label="Counter Party Account Number"
                 name="counterPartyAccountNumber"
@@ -160,7 +145,7 @@ function Form() {
                     ? "Please enter only integers"
                     : ""
                 }
-                sx={{ width: "50%" }}
+                sx={{ width: "100%" }}
                 InputProps={{ style: { color: "black" } }}
               />
             </Box>
@@ -222,7 +207,7 @@ function Form() {
               fullWidth
               InputProps={{ style: { color: "black" } }}
             >
-              {["Internal", "External", "Transfer"].map((option) => (
+              {["Cash", "Cheque", "NIFT/RTGS"].map((option) => (
                 <MenuItem key={option} value={option}>
                   {option}
                 </MenuItem>
@@ -274,7 +259,6 @@ function Form() {
                 "Equity",
                 "Forex",
                 "Mutual Funds",
-                "Government Bonds",
                 "Sovereign Gold Bonds",
               ].map((option) => (
                 <MenuItem key={option} value={option}>
@@ -322,6 +306,16 @@ function Form() {
                   required
                   disabled
                   sx={{ width: "100%" }}
+                  InputProps={{ style: { color: "black" } }}
+                />
+                <TextField
+                  label="Number of Asset"
+                  name="numberOfAsset"
+                  type="number"
+                  value={formData.numberOfAsset}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ width: "100%" }} // Adjusted for equal spacing without enlarging
                   InputProps={{ style: { color: "black" } }}
                 />
               </Box>

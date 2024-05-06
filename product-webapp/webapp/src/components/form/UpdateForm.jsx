@@ -81,7 +81,7 @@ function UpdateForm() {
           status: '',
           assetDetails: '',
           assetType: '',
-          numberOfAssets: '',
+          numberOfAsset: '',
           createdDate: '',
           deadlineDate: '',
           amountCurrencyType: '',
@@ -172,7 +172,7 @@ function UpdateForm() {
               required
               fullWidth
             >
-              {['Internal', 'External', 'Transfer'].map((option) => (
+              {["Cash", "Cheque", "NIFT/RTGS"].map((option) => (
                 <MenuItem key={option} value={option}>{option}</MenuItem>
               ))}
             </TextField>
@@ -239,6 +239,16 @@ function UpdateForm() {
                   required
                   disabled
                   sx={{ width: '100%' }}
+                />
+                <TextField
+                  label="Number of Asset"
+                  name="numberOfAsset"
+                  type="number"
+                  value={formData.numberOfAsset}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ width: "100%" }} // Adjusted for equal spacing without enlarging
+                  InputProps={{ style: { color: "black" } }}
                 />
               </Box>
               <TextField

@@ -191,9 +191,9 @@ const SSIList = () => {
   };
 
   return (
-    <Container sx={{marginTop:"10vh"}}>
+    <Container sx={{margin:"0",marginTop:"15vh"}}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Grid container spacing={3} sx={{ flexGrow: 1 }}>
+        <Grid container  spacing={3} sx={{ flexGrow: 1 }}>
           {data.map((d) => (
             <Grid
               item
@@ -215,7 +215,7 @@ const SSIList = () => {
         {/* Render filter box as a popup for smaller devices */}
         <Hidden mdUp>
           <Fab
-            sx={{ position: "absolute", top: "0", right: "5%" }}
+            sx={{ position: "absolute", top: "15%", right: "5%" }}
             color="primary"
             aria-label="filter"
             onClick={handleFilterOpen}
