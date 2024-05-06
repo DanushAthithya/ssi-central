@@ -56,6 +56,13 @@ const response = await axios.put(
         mobileNumber: "",
         password:""
       });
+      if (response.status === 200) {
+        // Redirect to the desired page upon successful form submission
+        window.location.replace("/adminHome/userFilter");
+    } else {
+        // Handle other status codes if needed
+        console.error("Unexpected status code:", response.status);
+    }
     } catch (error) {
       console.error("Error updating user details:", error);
     }

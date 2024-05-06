@@ -48,10 +48,26 @@ function UpdateForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    const response=await axios.put(`http://localhost:9092/api/v1/ssi/update/${formData.instructionId}`,{...formData});
-    console.log(response.data);
+    try {
+      // Perform the PUT request to update the data
+      const response = await axios.put(`http://localhost:9092/api/v1/ssi/update/${formData.instructionId}`, formData);
+      console.log(response.data);
+  
+      // Check if the response status indicates success
+      if (response.status === 200) {
+        // Redirect to the desired page upon successful form submission
+        window.location.replace("/userHome/ssiFilter");
+      } else {
+        // Handle other status codes if needed
+        console.error("Unexpected status code:", response.status);
+      }
+    } catch (error) {
+      // Handle errors in the form submission process
+      console.error("Error submitting form:", error);
+      // Optionally, display an error message to the user
+    }
   };
+  
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
