@@ -38,7 +38,7 @@ export default function CreateUser() {
             console.log('User created successfully:', response.data);
             if (response.status === 200 || response.status === 201) {
                 console.log('Redirecting to user list...');
-                window.location.replace("/adminHome/userList");
+                window.location.replace("/adminHome/userFilter");
             }
             // Clear form data after successful submission
             event.currentTarget.reset();

@@ -8,6 +8,7 @@ import Toolbar from "@mui/material/Toolbar";
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from '@mui/icons-material/Add';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 import ListIcon from '@mui/icons-material/List';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Divider, Drawer, MenuItem, Typography } from "@mui/material";
@@ -103,6 +104,7 @@ function AdminNavbar({ mode, toggleColorMode }) {
                 marginBottom: "15px",
                 px: "0",
               }}
+              onClick={()=>{window.location.replace("/adminHome")}}
             >
               <img src={logo} style={logoStyle} alt="logo of genysys" />
               </Box>
