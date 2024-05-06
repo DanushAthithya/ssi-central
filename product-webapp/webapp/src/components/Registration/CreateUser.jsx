@@ -62,7 +62,7 @@ export default function CreateUser() {
                         borderRadius: 5,
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                    <Avatar sx={{ m: 1, bgcolor: 'primary.main' , marginTop:'7vh' }}>
                         <PersonRoundedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">

@@ -1,4 +1,4 @@
-import { Button, Container, Grid, InputAdornment, Table, TableBody, TableCell, TableHead, TableRow, TextField } from '@mui/material';
+import { Button, Container, Grid, InputAdornment, Table, TableBody, TableCell, TableHead, TableRow, TextField, Tooltip } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -42,13 +42,15 @@ function UserList() {
   return (
     <Container sx={{marginTop:"10vh"}}>
       <h1 className='text-center mt-4'>User List</h1>
-      <Grid container spacing={2}>
+      <Grid container spacing={-35} justifyContent="center">
         <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Tooltip title="Search for Users" >
           <TextField
             fullWidth
             variant='outlined'
             sx={{minWidth:"500px"}}
             margin='normal'
+            
             label='Search users'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -60,6 +62,7 @@ function UserList() {
               )
             }}
           />
+          </Tooltip>
         </Grid>
       </Grid>
       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -86,7 +89,7 @@ function UserList() {
                 <TableCell>{item.emailId}</TableCell>
                 <TableCell>{item.role}</TableCell>
                 <TableCell>
-                  <Button onClick={() => handleEdit(item.empId, item.emailId, item.userName, item.role)}>Edit</Button>
+                  <Button onClick={() => handleEdit(item.empId, item.emailId, item.userName, item.role)} sx={{ marginLeft: -5 }} >Edit</Button>
                   <Button onClick={() => handleDelete(item.empId)}>Delete</Button>
                 </TableCell>
               </TableRow>

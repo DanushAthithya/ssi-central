@@ -165,7 +165,7 @@ function AdminNavbar({ mode, toggleColorMode }) {
                    Add User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
-                   Update SSI
+                   Update User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
                    User List
