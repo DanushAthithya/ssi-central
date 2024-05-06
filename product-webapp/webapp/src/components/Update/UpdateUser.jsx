@@ -37,15 +37,24 @@ const UpdateUser = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `http://localhost:9090/api/v1/user/${empId}`,
-        formData
-      );
+      const token = localStorage.getItem("token");
+
+const response = await axios.put(
+  `http://localhost:9090/api/v1/user/${empId}`,
+  {...formData},
+  {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+);
+
       console.log("User details updated successfully:", response.data);
       // Reset form after successful submission
       setFormData({
         ...formData,
         mobileNumber: "",
+        password:""
       });
     } catch (error) {
       console.error("Error updating user details:", error);
@@ -91,14 +100,14 @@ const UpdateUser = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
+                  autoComplete="off"
                   fullWidth
                   id="employeeName"
                   label="Employee Name"
                   name="employeeName"
                   autoFocus
                   disabled
-                  value={formData.employeeName}
+                  value={formData.userName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -110,36 +119,37 @@ const UpdateUser = () => {
                   type="email"
                   id="email"
                   autoComplete="email"
-                  disabled
-                  value={formData.email}
+                  value={formData.emailId}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControl fullWidth required>
-                  <InputLabel id="role-label">Role</InputLabel>
-                  <Select
-                    labelId="role-label"
-                    id="role"
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="user">User</MenuItem>
-                    <MenuItem value="admin">Admin</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="mobileNumber"
+                  name="mobilenumber"
                   label="Mobile Number"
-                  name="mobileNumber"
-                  autoFocus
-                  value={formData.mobileNumber}
-                  onChange={handleChange}
+                  type="tel"
+                  id="mobilenumber"
+                  autoComplete="mobilenumber"
+                  disabled
+                  value={formData.mobilernumber}
                 />
+              </Grid> */}
+              <Grid item xs={12}>
+                <FormControl fullWidth required>
+                  <InputLabel id="role-label">{formData.role}</InputLabel>
+                  <Select
+                  labelId="role-label"
+                    label="role"
+                    id="role"
+                    name="role"
+                    defaultValue={formData.role}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="User">User</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <Button

@@ -29,7 +29,12 @@ export default function CreateUser() {
             role: formData.get('role')
         };
         try {
-            const response = await axios.post('http://localhost:9090/api/v1/user', user);
+            const token=localStorage.getItem("token");
+            const response = await axios.post('http://localhost:9090/api/v1/user', {...user},{
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              });
             console.log('User created successfully:', response.data);
             // Clear form data after successful submission
             event.currentTarget.reset();
