@@ -73,8 +73,9 @@ public class UserServiceImpl implements UserService {
 	public void sendMail(String emailId, String password) {
 		// TODO Auto-generated method stub
 		String subject="Login Credentials";
-		String htmlBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Template</title></head><body><h1>Welcome!</h1><p>Your email: "
-				+ emailId + "</p><p>Your password: " + password + "</p></body></html>";
+		String htmlBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Template</title><style>body {font-family: Arial, sans-serif; background-color: white; margin: 0; padding: 20px;} .container {background-color: #ffffff; width: 600px; margin: 20px auto 0 auto; padding: 20px; box-shadow: 0 0 10px rgba(10,0,0,10); border-top: 8px solid #3498db;} h1 {font-size: 24px; color: #333; text-align: center;} .otp-container {background: linear-gradient(145deg, #3498db, #9b59b6); margin: 20px 0; padding: 10px; font-size: 20px; text-align: center; color: white; border-radius: 5px;}</style></head><body><div class=\"container\"><h1>Welcome!</h1><p>Your email: "
++ emailId + "</p><p>Your password: " + password + "</p><div class=\"otp-container\">{{ otp }}</div></div></body></html>";
+
 		MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
 
