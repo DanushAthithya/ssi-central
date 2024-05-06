@@ -86,7 +86,25 @@ public class UserServiceImpl implements UserService{
 	public void sendOtpMail(String emailId, String otp) {
 		// TODO Auto-generated method stub
 		String subject="Forgot Password Verification";
-		String htmlBody = "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>Email Template</title></head><body><h1>Welcome!</h1><h2>OTP: <div style={background-color:yellow;}>" + otp + "</div></h2></body></html>";
+		String htmlBody = "<!DOCTYPE html>" +
+                "<html lang=\"en\">" +
+                "<head>" +
+                "<meta charset=\"UTF-8\">" +
+                "<title>Email Template</title>" +
+                "<style>" +
+                "body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }" +
+                ".container { background-color: #ffffff; border-radius: 8px; padding: 20px; max-width: 600px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }" +
+                "h1 { color: #333333; text-align: center; }" +
+                ".otp { background: linear-gradient(145deg, #3498db, #9b59b6); color: #ffffff; font-size: 24px; padding: 10px; text-align: center; border-radius: 5px; margin-top: 20px; }" +
+                "</style>" +
+                "</head>" +
+                "<body>" +
+                "<div class='container'>" +
+                "<h1>Welcome!</h1>" +
+                "<h2>OTP: <div class='otp'>" + otp + "</div></h2>" +
+                "</div>" +
+                "</body>" +
+                "</html>";
 		MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
 

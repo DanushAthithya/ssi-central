@@ -41,10 +41,34 @@ public class DeadlineNotificationTask {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String deadlineDate = sdf.format(ssi.getDeadlineDate());
         String approachingDeadline = sdf.format(approachingDate);
-        return "<html><body>" +
-                "<h2>SSI ID: " + ssi.getInstructionId() + "</h2>" +
-                "<p>Approaching Deadline Date: " + approachingDeadline + "</p>" +
-                "<p>Final Deadline Date: " + deadlineDate + "</p>" +
-                "</body></html>";
+        return "<!DOCTYPE html>"
+                + "<html lang='en'>"
+                + "<head>"
+                + "<meta charset='UTF-8'>"
+                + "<meta name='viewport' content='width=device-width, initial-scale=1.0'>"
+                + "<style>"
+                + "body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #ecf0f5; color: #333; margin: 0; padding: 0; }"
+                + ".container { width: 80%; max-width: 600px; background: #fff; border-radius: 12px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12); margin: 5% auto; padding: 20px; border-top: 4px solid #3498db; }"
+                + ".header { background: linear-gradient(145deg, #3498db, #9b59b6); color: #ffffff; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; font-size: 24px; }"
+                + ".logo { width: 80px; height: auto; display: block; margin: 0 auto 10px; }"
+                + "h2 { font-size: 22px; margin: 0; }"
+                + "p { font-size: 16px; color: #666; line-height: 1.8; text-align: center; margin: 20px 0; }"
+                + ".footer { font-size: 14px; text-align: center; color: #888; padding-top: 15px; border-top: 1px solid #dee2e6; margin-top: 20px; }"
+                + "a { color: #3498db; text-decoration: none; font-weight: bold; }"
+                + "</style>"
+                + "</head>"
+                + "<body>"
+                + "<div class='container'>"
+                + "<div class='header'>"
+                + "<h2>SSI ID: " + ssi.getInstructionId() + "</h2>"
+                + "</div>"
+                + "<p>Approaching Deadline Date: " + approachingDeadline + "</p>"
+                + "<p>Final Deadline Date: " + deadlineDate + "</p>"
+                + "<div class='footer'>"
+                + "Need help? Contact us at <a href='mailto:support@example.com'>support@example.com</a>"
+                + "</div>"
+                + "</div>"
+                + "</body>"
+                + "</html>";
     }
 }

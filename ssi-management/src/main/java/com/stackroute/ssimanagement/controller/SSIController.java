@@ -146,6 +146,66 @@ List<SSI> ssiList = ssiService.filterSSIByStatus(status);
 return new ResponseEntity<>(ssiList,HttpStatus.OK);
 }
 
+@PostMapping("/filter/byDateRange/{startDate}/{endDate}")
+    public ResponseEntity<?> filterSSIByDateRangeAndEmail(@PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate, @PathVariable @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate,@RequestBody  String userEmailId) throws InvalidDateRangeException {
+    List<SSI> ssiList = ssiService.filterSSIByDate(startDate, endDate,userEmailId);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    }
+    return entity;
+}
+@PostMapping("/filter/byAmountRange/{minAmount}/{maxAmount}")
+    public ResponseEntity<?> filterSSIByAmountRangeAndEmail(@PathVariable BigDecimal minAmount, @PathVariable BigDecimal maxAmount,@RequestBody  String userEmailId) throws InvalidAmountException {
+    List<SSI> ssiList = ssiService.filterSSIByAmount(minAmount, maxAmount,userEmailId);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found between the given amount range", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+@PostMapping("/filter/byCounterParty/{counterPartyName}/{userEmailId}")
+public ResponseEntity<?> filterSSIByCounterPartyAndEmail(@PathVariable String counterPartyName,@RequestBody String userEmailId) {
+List<SSI> ssiList = ssiService.filterSSIByCounterPartyName(counterPartyName,userEmailId);
+ResponseEntity<?> entity;
+entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+return entity;
+}
+@PostMapping("/filter/byAssetType/{assetType}")
+    public ResponseEntity<?> filterSSIByAssetType(@PathVariable String assetType,@RequestBody String userEmailId) {
+    List<SSI> ssiList = ssiService.filterSSIByAssetType(assetType,userEmailId);
+    ResponseEntity<?> entity;
+    entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    return entity;
+}
+
+    @PostMapping("/filter/byAssetRange/{minAssetNo}/{maxAssetNo}")
+    public ResponseEntity<?> filterSSIByAssetRange(@PathVariable int minAssetNo, @PathVariable int maxAssetNo,@RequestBody String userEmailId) {
+    List<SSI> ssiList = ssiService.filterSSIByAssetRange(minAssetNo, maxAssetNo,userEmailId);
+    ResponseEntity<?> entity;
+    if (!ssiList.isEmpty()) {
+        entity = new ResponseEntity<>(ssiList, HttpStatus.OK);
+    } else {
+        entity = new ResponseEntity<>("No SSIs found within the specified asset range", HttpStatus.NOT_FOUND);
+    }
+    return entity;
+}
+
+    @PostMapping("/filter/byTransactionType/{transactionType}")
+    public ResponseEntity<?> filterSSIByTransactionType(@PathVariable String transactionType,@RequestBody String userEMailId) {
+    List<SSI> ssiList = ssiService.filterSSIByTransactionType(transactionType);
+    return new ResponseEntity<>(ssiList,HttpStatus.OK);
+}
+
+@PostMapping("/filter/byStatus/{status}")
+public ResponseEntity<?> filterSSIByStatusAndEmail(@PathVariable String status,@RequestBody String userEmailId) {
+List<SSI> ssiList = ssiService.filterSSIByStatus(status,userEmailId);
+return new ResponseEntity<>(ssiList,HttpStatus.OK);
+}
 
    
 @PostMapping("/generate-pdf")

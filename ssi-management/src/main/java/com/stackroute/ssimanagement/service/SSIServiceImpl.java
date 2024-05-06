@@ -66,53 +66,102 @@ public class SSIServiceImpl implements SSIService{
 	}
 
 	@Override
-	public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId {
-		String subject="Generated SSI";
-		String htmlBody = "<html>" +
-		"<head>" +
-		"<style>" +
-		"table {" +
-		"  font-family: Arial, sans-serif;" +
-		"  border-collapse: collapse;" +
-		"  width: 100%;" +
-		"}" +
-		"td, th {" +
-		"  border: 1px solid #dddddd;" +
-		"  text-align: left;" +
-		"  padding: 8px;" +
-		"}" +
-		"tr:nth-child(even) {" +
-		"  background-color: #dddddd;" +
-		"}" +
-		"</style>" +
-		"</head>" +
-		"<body>" +
-		"<h2>SSI Details</h2>" +
-		"<table>" +
-		"<tr><td>Instruction ID:</td><td>" + ssi.getInstructionId() + "</td></tr>" +
-		"<tr><td>Counterparty Account Number:</td><td>" + ssi.getCounterPartyAccountNumber() + "</td></tr>" +
-		"<tr><td>Counterparty Name:</td><td>" + ssi.getCounterPartyName() + "</td></tr>" +
-		"<tr><td>Counterparty Email:</td><td>" + ssi.getCounterPartyEmail() + "</td></tr>" +
-		"<tr><td>SWIFT Code:</td><td>" + ssi.getSwiftCode() + "</td></tr>" +
-		"<tr><td>Transaction Type:</td><td>" + ssi.getTransactionType() + "</td></tr>" +
-		"<tr><td>Status:</td><td>" + ssi.getStatus() + "</td></tr>" +
-		"<tr><td>Asset Details:</td><td>" + ssi.getAssetDetails() + "</td></tr>" +
-		"<tr><td>Asset Type:</td><td>" + ssi.getAssetType() + "</td></tr>" +
-		"<tr><td>Number of Assets:</td><td>" + ssi.getNumberOfAsset() + "</td></tr>" +
-		"<tr><td>Created Date:</td><td>" + ssi.getCreatedDate() + "</td></tr>" +
-		"<tr><td>Deadline Date:</td><td>" + ssi.getDeadlineDate() + "</td></tr>" +
-		"<tr><td>Amount Currency Type:</td><td>" + ssi.getAmountCurrencyType() + "</td></tr>" +
-		"<tr><td>Denomination:</td><td>" + ssi.getDenomination() + "</td></tr>" +
-		"<tr><td>Amount:</td><td>" + ssi.getAmount() + "</td></tr>" +
-		"<tr><td>Intermediary Account Number:</td><td>" + ssi.getIntermediaryAccountNumber() + "</td></tr>" +
-		"<tr><td>Beneficiary Account Number:</td><td>" + ssi.getBeneficiaryAccountNumber() + "</td></tr>" +
-		"<tr><td>Beneficiary Account Name:</td><td>" + ssi.getBeneficiaryAccountName() + "</td></tr>" +
-		"<tr><td>User ID:</td><td>" + ssi.getUserId() + "</td></tr>" +
-		"<tr><td>User EmailID:</td><td>" + ssi.getUserEmailId() + "</td></tr>" +
-		"<tr><td>Reference:</td><td>" + ssi.getReference() + "</td></tr>" +
-		"</table>" +
-		"</body>" +
-		"</html>";
+public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId {
+    String subject = "Generated SSI";
+    String htmlBody = "<!DOCTYPE html>" +
+        "<html>" +
+        "<head>" +
+        "<style>" +
+        "body {" +
+        "font-family: Arial, sans-serif;" +
+        "margin: 0;" +
+        "padding: 0;" +
+        "background-color: #f4f4f4;" +
+        "color: #333;" +
+        "}" +
+        ".container {" +
+        "background-color: #ffffff;" +
+        "width: 600px;" +
+        "margin: 20px auto;" +
+        "padding: 20px;" +
+        "box-shadow: 0 0 10px rgba(0,0,0,0.1);" +
+        "border-top: 5px solid #3498db;" +
+        "border-radius: 10px;" +
+        "}" +
+        ".header {" +
+        "background: linear-gradient(145deg, #3498db, #9b59b6);" +
+        "color: white;" +
+        "padding: 20px;" +
+        "font-size: 24px;" +
+        "text-align: center;" +
+        "border-top-left-radius: 8px;" +
+        "border-top-right-radius: 8px;" +
+        "}" +
+        "table {" +
+        "width: 100%;" +
+        "border-collapse: collapse;" +
+        "margin-top: 20px;" +
+        "}" +
+        "th, td {" +
+        "border: 1px solid #dddddd;" +
+        "text-align: left;" +
+        "padding: 8px;" +
+        "font-size: 16px;" +
+        "}" +
+        "th {" +
+        "background-color: #f8f8f8;" +
+        "font-weight: bold;" +
+        "}" +
+        "tr:nth-child(even) {" +
+        "background-color: #f9f9f9;" +
+        "}" +
+        "tr:hover {" +
+        "background-color: #e1e1e1;" + // Hover effect for rows
+        "}" +
+        ".footer {" +
+        "text-align: center;" +
+        "font-size: 14px;" +
+        "padding: 20px;" +
+        "background-color: #f1f1f1;" +
+        "border-bottom-left-radius: 8px;" +
+        "border-bottom-right-radius: 8px;" +
+        "}" +
+        "</style>" +
+        "</head>" +
+        "<body>" +
+        "<div class='container'>" +
+        "<div class='header'>" +
+        "SSI Details" +
+        "</div>" +
+        "<table>" +
+        "<tr><th>Instruction ID:</th><td>" + ssi.getInstructionId() + "</td></tr>" +
+        "<tr><th>Counterparty Account Number:</th><td>" + ssi.getCounterPartyAccountNumber() + "</td></tr>" +
+        "<tr><th>Counterparty Name:</th><td>" + ssi.getCounterPartyName() + "</td></tr>" +
+        "<tr><th>Counterparty Email:</th><td>" + ssi.getCounterPartyEmail() + "</td></tr>" +
+        "<tr><th>SWIFT Code:</th><td>" + ssi.getSwiftCode() + "</td></tr>" +
+        "<tr><th>Transaction Type:</th><td>" + ssi.getTransactionType() + "</td></tr>" +
+        "<tr><th>Status:</th><td>" + ssi.getStatus() + "</td></tr>" +
+        "<tr><th>Asset Details:</th><td>" + ssi.getAssetDetails() + "</td></tr>" +
+        "<tr><th>Asset Type:</th><td>" + ssi.getAssetType() + "</td></tr>" +
+        "<tr><th>Number of Assets:</th><td>" + ssi.getNumberOfAsset() + "</td></tr>" +
+        "<tr><th>Created Date:</th><td>" + ssi.getCreatedDate() + "</td></tr>" +
+        "<tr><th>Deadline Date:</th><td>" + ssi.getDeadlineDate() + "</td></tr>" +
+        "<tr><th>Amount Currency Type:</th><td>" + ssi.getAmountCurrencyType() + "</td></tr>" +
+        "<tr><th>Denomination:</th><td>" + ssi.getDenomination() + "</td></tr>" +
+        "<tr><th>Amount:</th><td>" + ssi.getAmount() + "</td></tr>" +
+        "<tr><th>Intermediary Account Number:</th><td>" + ssi.getIntermediaryAccountNumber() + "</td></tr>" +
+        "<tr><th>Beneficiary Account Number:</th><td>" + ssi.getBeneficiaryAccountNumber() + "</td></tr>" +
+        "<tr><th>Beneficiary Account Name:</th><td>" + ssi.getBeneficiaryAccountName() + "</td></tr>" +
+        "<tr><th>User ID:</th><td>" + ssi.getUserId() + "</td></tr>" +
+        "<tr><th>User EmailID:</th><td>" + ssi.getUserEmailId() + "</td></tr>" +
+        "<tr><th>Reference:</th><td>" + ssi.getReference() + "</td></tr>" +
+        "</table>" +
+        "<div class='footer'>" +
+        "Need help? Contact us at support@example.com" +
+        "</div>" +
+        "</div>" +
+        "</body>" +
+        "</html>";
 
 		MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
@@ -207,5 +256,45 @@ public class SSIServiceImpl implements SSIService{
 		return ssiRespository.findByStatus(status);
 	}
 	
+	@Override
+	public List<SSI> filterSSIByCounterPartyName(String counterPartyName,String userEMailId) {
+        return ssiRespository.findByCounterPartyNameIgnoreCaseAndUserEmailId(counterPartyName,userEMailId);
+	}
+	@Override
+	public List<SSI> filterSSIByDate(Date startDate, Date endDate, String userEmailId) throws InvalidDateRangeException {
+		if (endDate.before(startDate)) {
+			throw new InvalidDateRangeException("End date cannot be before start date");
+		}
+		return ssiRespository.filterSSIByDateAndUserEmailId(startDate, endDate,userEmailId);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount, String userEmailId)
+			throws InvalidAmountException {
+				if((minAmount.compareTo(maxAmount))>0){
+					throw new InvalidAmountException("Invalid Amount");
+				}
+				return ssiRespository.findByAmountBetweenAndUserEmailId(minAmount,maxAmount,userEmailId);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAssetType(String assetType, String userEmailId) {
+		return ssiRespository.findByAssetType(assetType);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAssetRange(int minAssetNo, int maxAssetNo, String userEmailId) {
+		return ssiRespository.findByNumberOfAsset(minAssetNo,maxAssetNo);
+	}
+
+	@Override
+	public List<SSI> filterSSIByTransactionType(String transactionType, String userEmailId) {
+		return ssiRespository.findByTransactionType(transactionType);
+	}
+
+	@Override
+	public List<SSI> filterSSIByStatus(String status, String userEmailId) {
+		return ssiRespository.findByStatusAndUserEmailId(status,userEmailId);
+	}
 
 }
