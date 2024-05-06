@@ -21,7 +21,7 @@ function UpdateForm() {
     status: '',
     assetDetails: '',
     assetType: '',
-    numberOfAssets: '',
+    numberOfAsset: '',
     createdDate: '',
     deadlineDate: '',
     amountCurrencyType: '',
@@ -42,6 +42,7 @@ function UpdateForm() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
     // Handle input change
   };
 
