@@ -106,6 +106,7 @@ function UserNavbar({ mode, toggleColorMode }) {
                 marginBottom: "15px",
                 px: "0",
               }}
+              onClick={()=>{window.location.replace("/userHome")}}
             >
               <img src={logo} style={logoStyle} alt="logo of genysys" />
             </Box>
