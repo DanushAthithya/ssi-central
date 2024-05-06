@@ -1,4 +1,3 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,6 +15,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import img from './img.jpg';
+import logo from '../../Images/GenySys__2_-removebg-preview.png';
 import backgroundImage from '../../Images/img.jpg';
 
 
@@ -85,7 +85,19 @@ function Login() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+            <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "start",
+                      flexGrow: 1,
+                      padding: "0",
+                      margin:"0",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <img  src={logo} style={{width:"100%",margin:"0"}} alt="logo of genysys" />
+                  </Box>
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in

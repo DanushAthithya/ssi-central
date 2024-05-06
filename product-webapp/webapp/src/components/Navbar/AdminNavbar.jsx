@@ -7,13 +7,12 @@ import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AddIcon from '@mui/icons-material/Add';
+import ListIcon from '@mui/icons-material/List';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Divider, Drawer, MenuItem, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import logo from "../../Images/GenySys__2_-removebg-preview.png";
-import LogoutIcon from '@mui/icons-material/Logout';
-import AddIcon from '@mui/icons-material/Add';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import ListIcon from '@mui/icons-material/List';
 // import logo from './logo2.png';
 
 const logoStyle = {
@@ -147,11 +146,25 @@ function AdminNavbar({ mode, toggleColorMode }) {
                    },
                  }}
                >
+                <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "start",
+                      flexGrow: 1,
+                      padding: "0",
+                      margin:"0",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <img  src={logo} style={{width:"100%",margin:"0"}} alt="logo of genysys" />
+                  </Box>
+                  <Divider />
                  <Box
                    sx={{
                      display: "flex",
                      flexDirection: "column",
-                     alignItems: "end",
+                     alignItems: "start",
                      flexGrow: 1,
                      padding: "20px",
                      fontWeight: "bold",
