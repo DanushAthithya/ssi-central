@@ -124,19 +124,19 @@ export default function ChartController() {
   onChange={handleChartChange}
   aria-label="chart type"
   orientation="vertical"
-  sx={{ width: '250px', marginLeft: '4vw' ,marginTop:'30px'}}
+  sx={{ width: '250px', height:"67vh", marginLeft: '.5vw' ,marginTop:'90px'}}
 >
-  <ToggleButton value="gauge" sx={{ marginBottom: '20px', color: selectedChart === 'gauge' ? 'green' : 'blue', backgroundColor: selectedChart === 'gauge' ? 'lightgreen' : 'lightblue'}}>
-    <SpeedRoundedIcon />Gauges
+<ToggleButton value="gauge" sx={{ marginBottom: '40px', fontSize: '1rem',height:"8vh", color: selectedChart === 'gauge' ? 'green' : 'blue', backgroundColor: selectedChart === 'gauge' ? 'lightgreen' : 'lightblue'}}>
+    <SpeedRoundedIcon sx={{ fontSize: '2rem', marginRight:"10px" }} /> Gauges
   </ToggleButton>
-  <ToggleButton value="bar" sx={{ marginBottom: '20px', color: selectedChart === 'bar' ? 'green' : 'blue', backgroundColor: selectedChart === 'bar' ? 'lightgreen' : 'lightblue' }}>
-    <BarChartRoundedIcon />Bar Chart
+  <ToggleButton value="bar" sx={{ marginBottom: '40px',fontSize: '1rem',height:"8vh", color: selectedChart === 'bar' ? 'green' : 'blue', backgroundColor: selectedChart === 'bar' ? 'lightgreen' : 'lightblue' }}>
+    <BarChartRoundedIcon sx={{ fontSize: '2rem', marginRight:"10px" }}  />Bar Chart
   </ToggleButton>
-  <ToggleButton value="line" sx={{ marginBottom: '20px', color: selectedChart === 'line' ? 'green' : 'blue', backgroundColor: selectedChart === 'line' ? 'lightgreen' : 'lightblue' }}>
-    <SsidChartRoundedIcon />Line Chart
+  <ToggleButton value="line" sx={{ marginBottom: '40px',fontSize: '1rem',height:"8vh", color: selectedChart === 'line' ? 'green' : 'blue', backgroundColor: selectedChart === 'line' ? 'lightgreen' : 'lightblue' }}>
+    <SsidChartRoundedIcon sx={{ fontSize: '2rem', marginRight:"10px" }} />Line Chart
   </ToggleButton>
-  <ToggleButton value="pie" sx={{ marginBottom: '18px', color: selectedChart === 'pie' ? 'green' : 'blue', backgroundColor: selectedChart === 'pie' ? 'lightgreen' : 'lightblue' }}>
-    <DonutLargeRoundedIcon />Pie Chart
+  <ToggleButton value="pie" sx={{ marginBottom: '30px',fontSize: '1rem', height:"8vh", color: selectedChart === 'pie' ? 'green' : 'blue', backgroundColor: selectedChart === 'pie' ? 'lightgreen' : 'lightblue' }}>
+    <DonutLargeRoundedIcon sx={{ fontSize: '2rem', marginRight:"10px" }} />Pie Chart
   </ToggleButton>
       {/* <ToggleButton value="gauge" sx={{ marginBottom: '20px' }}>
         <SpeedRoundedIcon/>Gauges
