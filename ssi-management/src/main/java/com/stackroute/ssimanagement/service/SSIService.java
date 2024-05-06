@@ -21,10 +21,17 @@ public interface SSIService {
 	public void sendDeadlineNotification(String counterPartyEmail,String userEMailId,String htmlBody) throws InvalidEmailId;
 	public List<SSI> checkSSIByIds(String instructionIds[]) throws InvalidSSIId;
 	public List<SSI> filterSSIByDate(Date startDate, Date endDate) throws  InvalidDateRangeException;
+	public List<SSI> filterSSIByDate(Date startDate, Date endDate,String userEmailId) throws  InvalidDateRangeException;
 	public List<SSI> filterSSIByCounterPartyName(String counterPartyName);
+	public List<SSI> filterSSIByCounterPartyName(String counterPartyName,String userEmailId);
 	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount) throws InvalidAmountException;
+	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount,String userEmailId) throws InvalidAmountException;
 	public List<SSI> filterSSIByAssetType(String assetType);
+	public List<SSI> filterSSIByAssetType(String assetType,String userEmailId);
 	public List<SSI> filterSSIByAssetRange(int minAssetNo,int maxAssetNo);
+	public List<SSI> filterSSIByAssetRange(int minAssetNo,int maxAssetNo,String userEmailId);
 	public List<SSI> filterSSIByTransactionType(String transactionType);
+	public List<SSI> filterSSIByTransactionType(String transactionType,String userEmailId);
 	public List<SSI> filterSSIByStatus(String status);
+	public List<SSI> filterSSIByStatus(String status,String userEmailId);
 }

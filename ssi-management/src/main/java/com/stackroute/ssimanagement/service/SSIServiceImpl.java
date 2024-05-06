@@ -256,5 +256,45 @@ public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId
 		return ssiRespository.findByStatus(status);
 	}
 	
+	@Override
+	public List<SSI> filterSSIByCounterPartyName(String counterPartyName,String userEMailId) {
+        return ssiRespository.findByCounterPartyNameIgnoreCaseAndUserEmailId(counterPartyName,userEMailId);
+	}
+	@Override
+	public List<SSI> filterSSIByDate(Date startDate, Date endDate, String userEmailId) throws InvalidDateRangeException {
+		if (endDate.before(startDate)) {
+			throw new InvalidDateRangeException("End date cannot be before start date");
+		}
+		return ssiRespository.filterSSIByDateAndUserEmailId(startDate, endDate,userEmailId);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAmount(BigDecimal minAmount, BigDecimal maxAmount, String userEmailId)
+			throws InvalidAmountException {
+				if((minAmount.compareTo(maxAmount))>0){
+					throw new InvalidAmountException("Invalid Amount");
+				}
+				return ssiRespository.findByAmountBetweenAndUserEmailId(minAmount,maxAmount,userEmailId);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAssetType(String assetType, String userEmailId) {
+		return ssiRespository.findByAssetType(assetType);
+	}
+
+	@Override
+	public List<SSI> filterSSIByAssetRange(int minAssetNo, int maxAssetNo, String userEmailId) {
+		return ssiRespository.findByNumberOfAsset(minAssetNo,maxAssetNo);
+	}
+
+	@Override
+	public List<SSI> filterSSIByTransactionType(String transactionType, String userEmailId) {
+		return ssiRespository.findByTransactionType(transactionType);
+	}
+
+	@Override
+	public List<SSI> filterSSIByStatus(String status, String userEmailId) {
+		return ssiRespository.findByStatusAndUserEmailId(status,userEmailId);
+	}
 
 }
