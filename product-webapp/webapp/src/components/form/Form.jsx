@@ -53,11 +53,10 @@ function Form() {
     beneficiaryAccountNumber: false,
     counterPartyEmail: false,
   });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-
+  
     // Perform validation
     const errors = { ...validationErrors };
     if (name === "instructionId" && !/^\d+$/.test(value)) {
@@ -68,12 +67,17 @@ function Form() {
       errors.beneficiaryAccountNumber = true;
     } else if (name === "counterPartyEmail" && !value.includes("@")) {
       errors.counterPartyEmail = true;
+    } else if (name === "amount" && parseFloat(value) < 0) { // Check if amount is negative
+      errors.amount = true;
+    } else if (name === "numberOfAsset" && parseInt(value) < 0) { // Check if number of assets is negative
+      errors.numberOfAsset = true;
     } else {
       errors[name] = false;
     }
-
+  
     setValidationErrors(errors);
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -314,27 +318,41 @@ function Form() {
                   InputProps={{ style: { color: "black" } }}
                 />
                 <TextField
-                  label="Number of Asset"
-                  name="numberOfAsset"
-                  type="number"
-                  value={formData.numberOfAsset}
-                  onChange={handleInputChange}
-                  required
-                  sx={{ width: "100%" }} // Adjusted for equal spacing without enlarging
-                  InputProps={{ style: { color: "black" } }}
-                />
+  label="Number of Asset"
+  name="numberOfAsset"
+  type="number"
+  value={formData.numberOfAsset}
+  onChange={handleInputChange}
+  required
+  error={validationErrors.numberOfAsset} // Apply error style based on validation
+  sx={{ width: "100%" }}
+  InputProps={{
+    style: { color: "black" },
+    inputProps: {
+      min: 0, // Set the minimum value
+    },
+  }}
+/>
+
               </Box>
               <Box sx={{ display: "flex", gap: "1vh", width: "100%" }}>
-                <TextField
-                  label="Amount"
-                  name="amount"
-                  type="number"
-                  value={formData.amount}
-                  onChange={handleInputChange}
-                  required
-                  sx={{ width: "50%" }} // Adjusted for equal spacing without enlarging
-                  InputProps={{ style: { color: "black" } }}
-                />
+              <TextField
+  label="Amount"
+  name="amount"
+  type="number"
+  
+  value={formData.amount}
+  onChange={handleInputChange}
+  required
+  error={validationErrors.amount} // Apply error style based on validation
+  sx={{ width: "50%" }}
+  InputProps={{
+    style: { color: "black" },
+    inputProps: {
+      min: 0, // Set the minimum value
+    },
+  }}
+/>
                 <TextField
                   select
                   label="Currency Type"
