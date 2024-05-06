@@ -39,12 +39,12 @@ export default function Visualize({datas}) {
     // Create an object for the current month
     const monthData = {
       month: month,
-      stock: datas[month].stock ? datas[month].stock.totalAmount : 0, // Check if 'stock' exists
-      equity: datas[month].equity ? datas[month].equity.totalAmount : 0, // Check if 'equity' exists
-      goldbond: datas[month].goldbond ? datas[month].goldbond.totalAmount : 0, // Check if 'goldbond' exists
-      governmentbond: datas[month].governmentbond ? datas[month].governmentbond.totalAmount : 0, // Check if 'govtbond' exists
+      stock: datas[month]['Equity'] ? datas[month]['Equity'].totalAmount : 0, // Check if 'stock' exists
+      equity: datas[month]['Forex'] ? datas[month]['Forex'].totalAmount : 0, // Check if 'equity' exists
+      goldbond: datas[month]['Sovereign Gold Bonds'] ? datas[month]['Sovereign Gold Bonds'].totalAmount : 0, // Check if 'goldbond' exists
+      governmentbond: datas[month]['Mutual Funds'] ? datas[month]['Mutual Funds'].totalAmount : 0, // Check if 'govtbond' exists
     };
-    console.log(monthData);
+    console.log(datas[month]['Equity']);
 
     // Add the monthData object to the dataset array
     dataset.push(monthData);
@@ -57,10 +57,10 @@ export default function Visualize({datas}) {
       dataset={dataset}
       xAxis={[{ scaleType: 'band', dataKey: 'month' , label:"Month" }]}
       series={[
-        { dataKey: 'stock', label: 'Stock', valueFormatter },
-        { dataKey: 'equity', label: 'Equity', valueFormatter },
-        { dataKey: 'goldbond', label: 'Gold Bond', valueFormatter },
-        { dataKey: 'governmentbond', label: 'Government Bond', valueFormatter },
+        { dataKey: 'stock', label: 'Equity', valueFormatter },
+        { dataKey: 'equity', label: 'Forex', valueFormatter },
+        { dataKey: 'goldbond', label: 'Soverign Gold Bonds', valueFormatter },
+        { dataKey: 'governmentbond', label: 'Mutual Funds', valueFormatter },
       ]}
       {...chartSetting}
     />

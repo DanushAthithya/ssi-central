@@ -6,10 +6,10 @@ import './PieChart.css';
 
 export default function PieCharts({datas}) {
   const data = [
-    { label: 'Stock', value: datas.stock },
-    { label: 'Equity', value: datas.equity },
-    { label: 'Gold Bond', value: datas.goldbond },
-    { label: 'Government Bond', value: datas.governmentbond },
+    { label: 'Equity', value: datas['Equity'] },
+    { label: 'Forex', value: datas['Forex'] },
+    { label: 'Sovereign Gold Bonds', value: datas['Sovereign Gold Bonds'] },
+    { label: 'Mutual Funds', value: datas['Mutual Funds'] },
   ];
   return (
     <div id="chart-container" className='chart-container-pie' >

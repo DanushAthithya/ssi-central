@@ -13,7 +13,6 @@ const data1 = [];
 const data2 = [];
 const data3 = [];
 const data4 = [];
-console.log()
 // Iterate over the keys of datas object (months)
 Object.keys(datas).forEach(month => {
   console.log(month)
@@ -21,10 +20,10 @@ Object.keys(datas).forEach(month => {
   // const monthData = datas[month];
   
   // Push the values for each series into the corresponding arrays
-  data1.push(datas[month].stock ? datas[month].stock.totalCount : 0);
-  data2.push(datas[month].equity ? datas[month].equity.totalCount : 0);
-  data3.push(datas[month].goldbond ? datas[month].goldbond.totalCount : 0);
-  data4.push(datas[month].governmentbond ? datas[month].governmentbond.totalCount : 0);
+  data1.push(datas[month]['Equity'] ? datas[month]['Equity'].totalCount : 0);
+  data2.push(datas[month]['Forex'] ? datas[month]['Forex'].totalCount : 0);
+  data3.push(datas[month]['Sovereign Gold Bonds'] ? datas[month]['Sovereign Gold Bonds'].totalCount : 0);
+  data4.push(datas[month]['Mutual Funds'] ? datas[month]['Mutual Funds'].totalCount : 0);
 });
 console.log(data1)
 
@@ -34,10 +33,10 @@ console.log(data1)
         <LineChart
           xAxis={[{ data: [1, 2,3,4,5,6,7,8,9,10,11,12], label: 'Months' }]}
           series={[
-            { data: data1, label: 'Stock' },
-            { data: data2, label: 'Equity' },
-            { data: data3, label: 'Gold Bond' },
-            { data: data4, label: 'Government Bond' },
+            { data: data1, label: 'Equity' },
+            { data: data2, label: 'Forex' },
+            { data: data3, label: 'Sovereign Gold Bonds' },
+            { data: data4, label: 'Mutual Funds' },
           ]}
           height={600}
           width={800}
