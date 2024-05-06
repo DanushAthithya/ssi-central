@@ -29,19 +29,24 @@ export default function CreateUser() {
             role: formData.get('role')
         };
         try {
-            const token=localStorage.getItem("token");
-            const response = await axios.post('http://localhost:9090/api/v1/user', {...user},{
+            const token = localStorage.getItem("token");
+            const response = await axios.post('http://localhost:9090/api/v1/user', user, {
                 headers: {
-                  Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`
                 }
-              });
+            });
             console.log('User created successfully:', response.data);
+            if (response.status === 200 || response.status === 201) {
+                console.log('Redirecting to user list...');
+                window.location.replace("/adminHome/userList");
+            }
             // Clear form data after successful submission
             event.currentTarget.reset();
         } catch (error) {
             console.error('Error creating user:', error);
         }
     };
+    
 
     const [role, setRole] = React.useState('');
     const handleChange = (event) => {

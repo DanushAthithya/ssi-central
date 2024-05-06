@@ -77,14 +77,19 @@ function Form() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Here you can handle form submission if needed
-    console.log("Form submitted:", formData);
-
-    const response = await axios.post("http://localhost:9092/api/v1/ssi/add/", {
-      ...formData,
-    });
-    console.log(response.data);
+  
+    try {
+      const response = await axios.post("http://localhost:9092/api/v1/ssi/add/", formData);
+      console.log(response.data);
+      console.log(response.status);
+      if (response.status === 200 || response.status === 201) {
+        window.location.replace("/userHome/ssiFilter");
+      } else {
+        console.error("Unexpected status code:", response.status);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   const handleNext = () => {
