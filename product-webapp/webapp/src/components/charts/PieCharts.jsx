@@ -1,7 +1,7 @@
-import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import { PieChart } from '@mui/x-charts/PieChart';
-import './PieChart.css'
+import * as React from 'react';
+import './PieChart.css';
 
 
 export default function PieCharts({datas}) {

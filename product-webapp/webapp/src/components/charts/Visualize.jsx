@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { Container } from '@mui/material';
 import { axisClasses } from '@mui/x-charts';
+import { BarChart } from '@mui/x-charts/BarChart';
+import * as React from 'react';
 import './Visualize.css';
-import { Button, Container } from '@mui/material';
-import html2canvas from 'html2canvas';
 const chartSetting = {
   yAxis: [
     {

@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import './ChartController.css'; // Import CSS file for styling
-import Gauges from './Gauges';
-import LineCharts from './LineChart';
-import PieCharts from './PieCharts';
-import Visualize from './Visualize';
-import {  Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import html2canvas from 'html2canvas';
-import axios from 'axios';
-import DownloadIcon from '@mui/icons-material/Download';
 import BarChartRoundedIcon from '@mui/icons-material/BarChartRounded';
 import DonutLargeRoundedIcon from '@mui/icons-material/DonutLargeRounded';
-import SsidChartRoundedIcon from '@mui/icons-material/SsidChartRounded';
+import DownloadIcon from '@mui/icons-material/Download';
 import SpeedRoundedIcon from '@mui/icons-material/SpeedRounded';
+import SsidChartRoundedIcon from '@mui/icons-material/SsidChartRounded';
+import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import axios from 'axios';
+import html2canvas from 'html2canvas';
+import React, { useEffect, useState } from 'react';
+import './ChartController.css'; // Import CSS file for styling
+import Gauges from './Gauges';
+import LineCharts from './LIneChart';
+import PieCharts from './PieCharts';
+import Visualize from './Visualize';
 export default function ChartController() {
   const [selectedChart, setSelectedChart] = useState('gauge');
 
@@ -103,7 +102,7 @@ export default function ChartController() {
   };
 
   return (
-    <div className="chart-container">
+    <div className="chart-container" style={{marginTop:"15vh"}}>
 
       
 {/* data={jsonData} */}<Card sx={{position:'relative',width:'65vw',marginLeft:'3vw', height:'80vh', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1)' }}>

@@ -1,8 +1,8 @@
 
-import * as React from 'react';
-import { LineChart } from '@mui/x-charts/LineChart';
 import { Container, Typography } from '@mui/material';
-import './LineChart.css'
+import { LineChart } from '@mui/x-charts/LineChart';
+import * as React from 'react';
+import './LineChart.css';
 export default function LineCharts({datas}) {
 
 // const data1 = [2, 8.5, 1.5, 5];

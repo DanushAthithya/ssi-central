@@ -1,7 +1,7 @@
-import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { Gauge } from '@mui/x-charts/Gauge';
-import './Gauges.css'
+import * as React from 'react';
+import './Gauges.css';
 
 export default function Gauges({datas}) {
   if (!datas) {

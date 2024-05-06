@@ -1,20 +1,20 @@
 import { FilterAlt } from "@mui/icons-material";
 import {
-    Box,
-    Button,
-    Container,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Fab,
-    Grid,
-    Hidden,
-    Menu,
-    MenuItem,
-    Slide,
-    TextField,
-    Typography,
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Fab,
+  Grid,
+  Hidden,
+  Menu,
+  MenuItem,
+  Slide,
+  TextField,
+  Typography,
 } from "@mui/material";
 import axios from "axios";
 import FileSaver from "file-saver"; // Import FileSaver.js or similar library
@@ -32,6 +32,7 @@ const SSIList = () => {
   const [anchorEl, setAnchorEl] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [data, setData] = useState([]);
+  const empId=JSON.parse(localStorage.getItem("user")).empId;
 
   useEffect(() => {
     fetchData(); // Fetch data when component mounts
@@ -40,7 +41,7 @@ const SSIList = () => {
   const fetchData = async () => {
     try {
       // Fetch data from REST API
-      const response = await axios.get("http://localhost:9092/api/v1/ssi/");
+      const response = await axios.get(`http://localhost:9092/api/v1/ssi/${empId}`);
       const responseData = response.data; // Access the data property directly
       setData(responseData);
     } catch (error) {
@@ -77,7 +78,7 @@ const SSIList = () => {
   const filterSSIByDate = async (fromDate, toDate) => {
     try {
       const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byDateRange/${fromDate}/${toDate}`
+        `http://localhost:9092/api/v1/ssi/filter/byDateRange/${fromDate}/${toDate}/${empId}`
       );
       setData(response.data || []); // If response.data is null, set an empty array
     } catch (error) {
@@ -88,7 +89,7 @@ const SSIList = () => {
   const filterSSIByCounterParty = async (counterPartyName) => {
     try {
       const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byCounterParty/${counterPartyName}`
+        `http://localhost:9092/api/v1/ssi/filter/byCounterParty/${counterPartyName}/${empId}`
       );
       setData(response.data || []);
     } catch (error) {
@@ -99,7 +100,7 @@ const SSIList = () => {
   const filterSSIByInstructionID = async (instructionId) => {
     try {
       const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/check/${instructionId}`
+        `http://localhost:9092/api/v1/ssi/check/${instructionId}/${empId}`
       );
       setData(response.data || []);
     } catch (error) {
@@ -110,7 +111,7 @@ const SSIList = () => {
   const filterSSIByStatus = async (status) => {
     try {
       const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byStatus/${status}`
+        `http://localhost:9092/api/v1/ssi/filter/byStatus/${status}/${empId}`
       );
       setData(response.data || []);
     } catch (error) {
@@ -121,7 +122,7 @@ const SSIList = () => {
   const filterSSIByAssetType = async (assetType) => {
     try {
       const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byAssetType/${assetType}`
+        `http://localhost:9092/api/v1/ssi/filter/byAssetType/${assetType}/${empId}`
       );
       setData(response.data || []);
     } catch (error) {
@@ -180,7 +181,7 @@ const SSIList = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{marginTop:"10vh"}}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Grid container spacing={3} sx={{ flexGrow: 1 }}>
           {data.map((d) => (

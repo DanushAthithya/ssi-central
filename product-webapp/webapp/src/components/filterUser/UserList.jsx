@@ -25,8 +25,8 @@ function UserList() {
   }, []);
 
   const handleEdit = (empId, emailId, userName, role) => {
-    window.location.replace(`/update-user/${empId}/${emailId}/${userName}/${role}`);
-    console.log("Edit");
+    localStorage.setItem("user-edit",JSON.stringify({empId,emailId,userName,role}));
+    window.location.replace("/adminHome/updateUser")
   };
 
   const handleDelete = async (empId) => {
@@ -40,7 +40,7 @@ function UserList() {
   };
 
   return (
-    <Container>
+    <Container sx={{marginTop:"10vh"}}>
       <h1 className='text-center mt-4'>User List</h1>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4} lg={3}>
