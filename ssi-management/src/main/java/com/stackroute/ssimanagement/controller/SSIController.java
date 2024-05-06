@@ -56,6 +56,13 @@ public class SSIController {
         return entity;
     }
 
+    @GetMapping("/{emailId}")
+    public ResponseEntity<?> displaySSIListByEmailId(@PathVariable String emailId) {
+        List<SSI> SSIList = ssiService.displaySSIListByEmailId(emailId);
+        ResponseEntity<List<SSI>> entity = new ResponseEntity<List<SSI>>(SSIList, HttpStatus.OK);
+        return entity;
+    }
+
     @PutMapping("/update/{instructionId}")
 	public ResponseEntity<String> updateSSI(@PathVariable int instructionId,@RequestBody SSI ssi) throws InvalidSSIId{
         boolean update = ssiService.updateSSI(ssi);
@@ -168,7 +175,7 @@ return new ResponseEntity<>(ssiList,HttpStatus.OK);
     }
     return entity;
 }
-@PostMapping("/filter/byCounterParty/{counterPartyName}/{userEmailId}")
+@PostMapping("/filter/byCounterParty/{counterPartyName}")
 public ResponseEntity<?> filterSSIByCounterPartyAndEmail(@PathVariable String counterPartyName,@RequestBody String userEmailId) {
 List<SSI> ssiList = ssiService.filterSSIByCounterPartyName(counterPartyName,userEmailId);
 ResponseEntity<?> entity;

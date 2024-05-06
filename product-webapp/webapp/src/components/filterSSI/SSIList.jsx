@@ -32,7 +32,7 @@ const SSIList = () => {
   const [anchorEl, setAnchorEl] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [data, setData] = useState([]);
-  const empId=JSON.parse(localStorage.getItem("user")).empId;
+  const emailId=JSON.parse(localStorage.getItem("user")).emailId;
 
   useEffect(() => {
     fetchData(); // Fetch data when component mounts
@@ -41,7 +41,7 @@ const SSIList = () => {
   const fetchData = async () => {
     try {
       // Fetch data from REST API
-      const response = await axios.get(`http://localhost:9092/api/v1/ssi/${empId}`);
+      const response = await axios.get(`http://localhost:9092/api/v1/ssi/${emailId}`);
       const responseData = response.data; // Access the data property directly
       setData(responseData);
     } catch (error) {
@@ -77,52 +77,62 @@ const SSIList = () => {
 
   const filterSSIByDate = async (fromDate, toDate) => {
     try {
-      const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byDateRange/${fromDate}/${toDate}/${empId}`
+      const response = await axios.post(
+        `http://localhost:9092/api/v1/ssi/filter/byDateRange/${fromDate}/${toDate}`,
+        emailId,
+        { headers: { 'Content-Type': 'text/plain' } }
       );
       setData(response.data || []); // If response.data is null, set an empty array
     } catch (error) {
       console.error("Error filtering data by date:", error);
     }
   };
-
+  
   const filterSSIByCounterParty = async (counterPartyName) => {
     try {
-      const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byCounterParty/${counterPartyName}/${empId}`
+      const response = await axios.post(
+        `http://localhost:9092/api/v1/ssi/filter/byCounterParty/${counterPartyName}`,
+        emailId,
+        { headers: { 'Content-Type': 'text/plain' } }
       );
       setData(response.data || []);
     } catch (error) {
       console.error("Error filtering data by counterparty:", error);
     }
   };
-
+  
   const filterSSIByInstructionID = async (instructionId) => {
     try {
-      const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/check/${instructionId}/${empId}`
+      const response = await axios.post(
+        `http://localhost:9092/api/v1/ssi/check/${instructionId}`,
+        emailId,
+        { headers: { 'Content-Type': 'text/plain' } }
       );
       setData(response.data || []);
     } catch (error) {
       console.error("Error filtering data by instruction ID:", error);
     }
   };
-
+  
   const filterSSIByStatus = async (status) => {
     try {
-      const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byStatus/${status}/${empId}`
+      const response = await axios.post(
+        `http://localhost:9092/api/v1/ssi/filter/byStatus/${status}`,
+        emailId,
+        { headers: { 'Content-Type': 'text/plain' } }
       );
       setData(response.data || []);
     } catch (error) {
       console.error("Error filtering data by status:", error);
     }
   };
-
+  
   const filterSSIByAssetType = async (assetType) => {
     try {
-      const response = await axios.get(
-        `http://localhost:9092/api/v1/ssi/filter/byAssetType/${assetType}/${empId}`
+      const response = await axios.post(
+        `http://localhost:9092/api/v1/ssi/filter/byAssetType/${assetType}`,
+        emailId,
+        { headers: { 'Content-Type': 'text/plain' } }
       );
       setData(response.data || []);
     } catch (error) {

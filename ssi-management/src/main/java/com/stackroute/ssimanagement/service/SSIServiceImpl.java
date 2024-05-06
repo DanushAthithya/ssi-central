@@ -297,4 +297,9 @@ public void sendMailSSI(String counterPartyEmail, SSI ssi) throws InvalidEmailId
 		return ssiRespository.findByStatusAndUserEmailId(status,userEmailId);
 	}
 
+	@Override
+	public List<SSI> displaySSIListByEmailId(String emailId) {
+		return ssiRespository.findByUserEmailId(emailId);
+	}
+
 }

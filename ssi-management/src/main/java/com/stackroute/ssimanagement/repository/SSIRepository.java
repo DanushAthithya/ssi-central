@@ -40,4 +40,5 @@ public interface SSIRepository extends JpaRepository<SSI, Integer> {
     List<SSI> findByTransactionTypeAndUserEmailId(String transactionType,String userEmailId);
     List<SSI> findByStatus(String status);
     List<SSI> findByStatusAndUserEmailId(String status,String userEmailId);
+    List<SSI> findByUserEmailId(String userEmailId);
 }

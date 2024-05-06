@@ -3,7 +3,6 @@ package com.stackroute.ssimanagement.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import com.stackroute.ssimanagement.exception.InvalidAmountException;
 import com.stackroute.ssimanagement.exception.InvalidDateRangeException;
@@ -34,4 +33,5 @@ public interface SSIService {
 	public List<SSI> filterSSIByTransactionType(String transactionType,String userEmailId);
 	public List<SSI> filterSSIByStatus(String status);
 	public List<SSI> filterSSIByStatus(String status,String userEmailId);
+	public List<SSI> displaySSIListByEmailId(String emailId);
 }
