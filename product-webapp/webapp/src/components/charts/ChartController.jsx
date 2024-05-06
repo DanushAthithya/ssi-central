@@ -28,13 +28,14 @@ export default function ChartController() {
   const [assetCount, setAssetCount] = useState({});
   const [assetTypeamt, setAssetTypeAmt] = useState({});
   const [monthlyAssetCounts, setMonthlyAssetCounts] = useState({});
+  const emailId=JSON.parse(localStorage.getItem("user")).emailId;
  useEffect(() => {
   console.log('inside useEffect hook')
   fetchData();
 }, []);
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:9092/api/v1/ssi/');
+      const response = await axios.get(`http://localhost:9092/api/v1/ssi/${emailId}`);
       setData(response.data);
       console.log("asset - " + response.data[0].assetType+ response.data[0].createdDate);
       const aggregatedData = {};
