@@ -6,6 +6,11 @@ import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import LogoutIcon from '@mui/icons-material/Logout';
+import AddIcon from '@mui/icons-material/Add';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import ListIcon from '@mui/icons-material/List';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import React from "react";
 
 import { Divider, Drawer, MenuItem } from "@mui/material";
@@ -156,19 +161,19 @@ function UserNavbar({ mode, toggleColorMode }) {
                     </IconButton>
                   </Box>
                   <MenuItem onClick={() => window.location.replace("/userHome/createSSI")}>
-                   Generate SSI
+                   <AddIcon style={{marginRight:'15px'}}/>Generate SSI
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/userHome/ssiFilter")}>
-                   Update SSI
+                   <EditNoteIcon style={{marginRight:'15px'}}/>Update SSI
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/userHome/visualization")}>
-                   Visualizations
+                   <BarChartIcon style={{marginRight:'15px'}}/>Visualizations
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/userHome/ssiFilter")}>
-                   Filters
+                   <ListIcon style={{marginRight:'15px'}}/>SSI List
                  </MenuItem>
                   {/* Add Logout Button */}
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem onClick={handleLogout}><LogoutIcon style={{marginRight:'15px'}}/>Logout</MenuItem>
                   <Divider />
                 </Box>
               </Drawer>
