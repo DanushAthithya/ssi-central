@@ -169,7 +169,7 @@ function AdminNavbar({ mode, toggleColorMode }) {
                    <AddIcon style={{marginRight:'15px'}}/>Add User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
-                   Update User
+                   <EditNoteIcon style={{marginRight:'15px'}}/>Update User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
                    <ListIcon style={{marginRight:'15px'}}/>User List

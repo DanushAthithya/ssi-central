@@ -17,7 +17,9 @@ const logoStyle = {
   width: "140px",
   height: "auto",
   cursor: "pointer",
-  padding:"0"
+  padding:"0",
+  position: "relative",
+  top: "-6px"
 };
 
 function LandingPageHeader({ mode, toggleColorMode }) {
