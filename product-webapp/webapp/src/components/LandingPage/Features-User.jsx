@@ -1,28 +1,18 @@
-import * as React from 'react';
+import { AddRounded, ViewList } from '@mui/icons-material';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
-import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
-import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
-import AutoFixHighRoundedIcon from '@mui/icons-material/AutoFixHighRounded';
-import { AddRounded, EditNoteOutlined, EditNoteRounded, ViewList } from '@mui/icons-material';
-import BarChartIcon from '@mui/icons-material/BarChart';
+import * as React from 'react';
 const items = [
   {
     icon: <AddRounded sx={{ fontSize: '2rem' }}/>,
     title: 'Generate SSI',
     // description: 'Option 1 description',
     onClick:() => window.location.replace("/userHome/createSSI"), 
-  },
-  {
-    icon: <EditNoteRounded sx={{ fontSize: '2rem' }} />,
-    title: 'Update SSI',
-    // description: 'Option 2 description',
-    onClick:() => window.location.replace("/userHome/ssiFilter"), // Example click handler
   },
   {
     icon: <ViewList sx={{ fontSize: '2rem' }}/>,

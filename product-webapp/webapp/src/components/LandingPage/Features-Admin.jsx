@@ -1,10 +1,4 @@
-import { AddRounded, EditNoteRounded, ViewAgenda, ViewArray, ViewList } from '@mui/icons-material';
-import AutoFixHighRoundedIcon from '@mui/icons-material/AutoFixHighRounded';
-import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
-import QueryStatsRoundedIcon from '@mui/icons-material/QueryStatsRounded';
-import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
-import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
-import ThumbUpAltRoundedIcon from '@mui/icons-material/ThumbUpAltRounded';
+import { AddRounded, ViewList } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
@@ -19,11 +13,7 @@ const items = [
     title: 'Add User',
     onClick:() => window.location.replace("/adminHome/createUser"), 
   },
-  {
-    icon: <EditNoteRounded  sx={{ fontSize: '2rem' }} />,
-    title: 'Update User',
-    onClick:() => window.location.replace("/adminHome/userFilter"), 
-  },
+  
   {
     icon: <ViewList  sx={{ fontSize: '2rem' }} />,
     title: 'User List',

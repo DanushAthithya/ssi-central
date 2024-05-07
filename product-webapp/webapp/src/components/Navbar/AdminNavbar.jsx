@@ -1,10 +1,9 @@
 import * as React from "react";
 
+import { ArrowBackIosRounded } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from '@mui/icons-material/Add';
-import EditNoteIcon from '@mui/icons-material/EditNote';
 import ListIcon from '@mui/icons-material/List';
-import { ArrowBackIosRounded } from "@mui/icons-material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from "@mui/icons-material/Menu";
 import { Divider, Drawer, MenuItem, Typography } from "@mui/material";
@@ -202,9 +201,6 @@ function AdminNavbar({ mode, toggleColorMode }) {
                  </Box>
                  <MenuItem onClick={() => window.location.replace("/adminHome/createUser")}>
                    <AddIcon style={{marginRight:'15px'}}/>Add User
-                 </MenuItem>
-                 <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
-                   <EditNoteIcon style={{marginRight:'15px'}}/>Update User
                  </MenuItem>
                  <MenuItem onClick={() => window.location.replace("/adminHome/userFilter")}>
                    <ListIcon style={{marginRight:'15px'}}/>User List

@@ -1,7 +1,7 @@
+import { ArrowBackIosRounded } from "@mui/icons-material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddIcon from "@mui/icons-material/Add";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import EditNoteIcon from "@mui/icons-material/EditNote";
 import ListIcon from "@mui/icons-material/List";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -14,7 +14,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import logo from "../../Images/GenySys__2_-removebg-preview.png";
-import { ArrowBackIosRounded } from "@mui/icons-material";
 const logoStyle = {
   width: "140px",
   height: "auto",
@@ -191,14 +190,7 @@ function UserNavbar({ mode, toggleColorMode }) {
                     <AddIcon style={{ marginRight: "15px" }} />
                     Generate SSI
                   </MenuItem>
-                  <MenuItem
-                    onClick={() =>
-                      window.location.replace("/userHome/ssiFilter")
-                    }
-                  >
-                    <EditNoteIcon style={{ marginRight: "15px" }} />
-                    Update SSI
-                  </MenuItem>
+                  
                   <MenuItem
                     onClick={() =>
                       window.location.replace("/userHome/visualization")
