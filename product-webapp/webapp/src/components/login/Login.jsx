@@ -1,4 +1,3 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -16,7 +15,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import img from './img.jpg';
+import logo from '../../Images/GenySys__2_-removebg-preview.png';
 import backgroundImage from '../../Images/img.jpg';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -84,9 +85,7 @@ function Login() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <Avatar sx = {{backgroundColor:'blue'}}><LockOutlinedIcon></LockOutlinedIcon></Avatar><br></br>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
@@ -115,7 +114,7 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <FormControlLabel
+              <FormControlLabel 
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
@@ -129,7 +128,7 @@ function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link to="/forgotPassword" variant="body2">
+                  <Link to="/forgotPassword" variant="body2" >
                     Forgot password?
                   </Link>
                 </Grid>

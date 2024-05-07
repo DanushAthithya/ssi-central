@@ -1,36 +1,30 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AddIcon from "@mui/icons-material/Add";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import ListIcon from "@mui/icons-material/List";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Divider, Drawer, MenuItem } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import LogoutIcon from '@mui/icons-material/Logout';
-import AddIcon from '@mui/icons-material/Add';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import ListIcon from '@mui/icons-material/List';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import React from "react";
-import HomeIcon from '@mui/icons-material/Home';
-
-import { Divider, Drawer, MenuItem } from "@mui/material";
 import logo from "../../Images/GenySys__2_-removebg-preview.png";
-import { ArrowBack, ArrowBackIos, ArrowBackIosRounded } from "@mui/icons-material";
-
+import { ArrowBackIosRounded } from "@mui/icons-material";
 const logoStyle = {
   width: "140px",
   height: "auto",
   cursor: "pointer",
 };
-
 function UserNavbar({ mode, toggleColorMode }) {
   const [open, setOpen] = React.useState(false);
-
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
@@ -44,11 +38,9 @@ function UserNavbar({ mode, toggleColorMode }) {
       setOpen(false);
     }
   };
-
   // Get user data from localStorage
   const user = localStorage.getItem("user");
   const userName = user ? JSON.parse(user).userName : "";
-
   // Handle logout
   const handleLogout = () => {
     // Clear user data from localStorage
@@ -56,7 +48,6 @@ function UserNavbar({ mode, toggleColorMode }) {
     // Redirect to login page
     window.location.replace("/login");
   };
-
   return (
     <div>
       <AppBar
@@ -88,7 +79,7 @@ function UserNavbar({ mode, toggleColorMode }) {
         >
           <ArrowBackIosRounded />
         </IconButton>
-        <Container maxWidth="lg">
+        <Container maxWidth="false">
           <Toolbar
             variant="regular"
             sx={(theme) => ({
@@ -125,9 +116,10 @@ function UserNavbar({ mode, toggleColorMode }) {
                 flexGrow: 1,
                 display: "flex",
                 alignItems: "center",
-                marginBottom:"15px",
-                px:"0"
+                marginBottom: "15px",
+                px: "0",
               }}
+              onClick={()=>{window.location.replace("/userHome")}}
             >
               <img src={logo} style={logoStyle} alt="logo of genysys" />
             </Box>
@@ -147,12 +139,7 @@ function UserNavbar({ mode, toggleColorMode }) {
               </IconButton>
             </Box>
             <Box sx={{ display: { sm: "", md: "none" } }}>
-             
-              <Drawer
-                anchor="left"
-                open={open}
-                onClose={toggleDrawer(false)}
-              >
+              <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
                 <Box
                   sx={{
                     width: "250px",
@@ -168,7 +155,21 @@ function UserNavbar({ mode, toggleColorMode }) {
                     sx={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "end",
+                      alignItems: "start",
+                      flexGrow: 1,
+                      padding: "0",
+                      margin:"0",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <img  src={logo} style={{width:"100%",margin:"0"}} alt="logo of genysys" />
+                  </Box>
+                  <Divider />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "start",
                       flexGrow: 1,
                       padding: "20px",
                       fontWeight: "bold",
@@ -182,20 +183,43 @@ function UserNavbar({ mode, toggleColorMode }) {
                       </Typography>
                     </IconButton>
                   </Box>
-                  <MenuItem onClick={() => window.location.replace("/userHome/createSSI")}>
-                   <AddIcon style={{marginRight:'15px'}}/>Generate SSI
-                 </MenuItem>
-                 <MenuItem onClick={() => window.location.replace("/userHome/ssiFilter")}>
-                   <EditNoteIcon style={{marginRight:'15px'}}/>Update SSI
-                 </MenuItem>
-                 <MenuItem onClick={() => window.location.replace("/userHome/visualization")}>
-                   <BarChartIcon style={{marginRight:'15px'}}/>Visualizations
-                 </MenuItem>
-                 <MenuItem onClick={() => window.location.replace("/userHome/ssiFilter")}>
-                   <ListIcon style={{marginRight:'15px'}}/>SSI List
-                 </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      window.location.replace("/userHome/createSSI")
+                    }
+                  >
+                    <AddIcon style={{ marginRight: "15px" }} />
+                    Generate SSI
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      window.location.replace("/userHome/ssiFilter")
+                    }
+                  >
+                    <EditNoteIcon style={{ marginRight: "15px" }} />
+                    Update SSI
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      window.location.replace("/userHome/visualization")
+                    }
+                  >
+                    <BarChartIcon style={{ marginRight: "15px" }} />
+                    Visualizations
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() =>
+                      window.location.replace("/userHome/ssiFilter")
+                    }
+                  >
+                    <ListIcon style={{ marginRight: "15px" }} />
+                    SSI List
+                  </MenuItem>
                   {/* Add Logout Button */}
-                  <MenuItem onClick={handleLogout}><LogoutIcon style={{marginRight:'15px'}}/>Logout</MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <LogoutIcon style={{ marginRight: "15px" }} />
+                    Logout
+                  </MenuItem>
                   <Divider />
                 </Box>
               </Drawer>
@@ -206,5 +230,4 @@ function UserNavbar({ mode, toggleColorMode }) {
     </div>
   );
 }
-
 export default UserNavbar;

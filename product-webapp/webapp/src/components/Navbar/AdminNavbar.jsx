@@ -1,20 +1,19 @@
 import * as React from "react";
 
-import MenuIcon from "@mui/icons-material/Menu";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Toolbar from "@mui/material/Toolbar";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Divider, Drawer, MenuItem, Typography } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import logo from "../../Images/GenySys__2_-removebg-preview.png";
-import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import ListIcon from '@mui/icons-material/List';
 import { ArrowBackIosRounded } from "@mui/icons-material";
+import LogoutIcon from '@mui/icons-material/Logout';
+import MenuIcon from "@mui/icons-material/Menu";
+import { Divider, Drawer, MenuItem, Typography } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import logo from "../../Images/GenySys__2_-removebg-preview.png";
 // import logo from './logo2.png';
 
 const logoStyle = {
@@ -83,7 +82,7 @@ function AdminNavbar({ mode, toggleColorMode }) {
         >
           <ArrowBackIosRounded />
         </IconButton>
-        <Container maxWidth="lg">
+        <Container maxWidth="false">
           {/* Hamburger Menu */}
 
           <Toolbar
@@ -125,6 +124,7 @@ function AdminNavbar({ mode, toggleColorMode }) {
                 marginBottom: "15px",
                 px: "0",
               }}
+              onClick={()=>{window.location.replace("/adminHome")}}
             >
               <img src={logo} style={logoStyle} alt="logo of genysys" />
               </Box>
@@ -168,11 +168,25 @@ function AdminNavbar({ mode, toggleColorMode }) {
                    },
                  }}
                >
+                <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "start",
+                      flexGrow: 1,
+                      padding: "0",
+                      margin:"0",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <img  src={logo} style={{width:"100%",margin:"0"}} alt="logo of genysys" />
+                  </Box>
+                  <Divider />
                  <Box
                    sx={{
                      display: "flex",
                      flexDirection: "column",
-                     alignItems: "end",
+                     alignItems: "start",
                      flexGrow: 1,
                      padding: "20px",
                      fontWeight: "bold",

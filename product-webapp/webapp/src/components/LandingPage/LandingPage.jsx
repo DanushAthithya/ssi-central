@@ -7,9 +7,9 @@ import * as React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import image1 from '../../Images/1.jpg';
-import image2 from '../../Images/2.jpg';
-import image3 from '../../Images/3.jpg';
+import image1 from '../../Images/1.png';
+import image2 from '../../Images/2.png';
+import image3 from '../../Images/3.png';
 
 
 const images = [

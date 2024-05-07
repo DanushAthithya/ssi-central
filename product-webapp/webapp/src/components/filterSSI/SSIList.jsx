@@ -359,6 +359,9 @@ const SSIList = () => {
               </Menu>
             </DialogContent>
             <DialogActions>
+            <Button onClick={()=>{window.location.reload()}} color="primary">
+                Refresh
+              </Button>
               <Button onClick={handleFilterClose} color="primary">
                 Close
               </Button>
@@ -375,7 +378,7 @@ const SSIList = () => {
               borderRadius: "8px",
               padding: "16px",
               marginTop: "20px",
-              maxHeight: "45vh",
+              maxHeight: "55vh",
               position:"absolute",
               right:"5vw",
             }}
@@ -482,6 +485,14 @@ const SSIList = () => {
               sx={{ mb: 3 }}
             >
               Apply
+            </Button>
+            <Button
+              variant="contained"
+              onClick={()=>{window.location.reload()}}
+              fullWidth
+              sx={{ mb: 3 }}
+            >
+              Refresh
             </Button>
             <Button
               variant="contained"
