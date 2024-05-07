@@ -81,6 +81,7 @@ function UpdateForm() {
     setValidationErrors(errors);
   };
   const handleSubmit = async (e) => {
+    generateValue();
     e.preventDefault();
     try {
       // Perform the PUT request to update the data
@@ -521,7 +522,7 @@ function UpdateForm() {
             <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
               <Button
                 variant="contained"
-                onClick={generateValue}
+                onClick={handleSubmit}
                 color="primary"
               >
                 Generate
