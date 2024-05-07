@@ -1,4 +1,5 @@
-import Features from "../LandingPage/Features"
+
+import FeaturesUser from "../LandingPage/Features-User"
 import Footer from "../LandingPage/Footer"
 import LandingPage from "../LandingPage/LandingPage"
 import Screenshots from "../LandingPage/ScreenShots"
@@ -9,9 +10,10 @@ const UserHome=()=>{
     return(
         <div className="UserHome">
             <UserNavbar/>
-            <LandingPage/>
-            <Screenshots/>
-            <Features/>
+            {/* <LandingPage/> */}
+            {/* <Screenshots/> */}
+            
+            <FeaturesUser/>
             <Footer/>
         </div>
     )

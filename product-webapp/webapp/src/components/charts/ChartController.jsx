@@ -3,7 +3,7 @@ import DonutLargeRoundedIcon from '@mui/icons-material/DonutLargeRounded';
 import DownloadIcon from '@mui/icons-material/Download';
 import SpeedRoundedIcon from '@mui/icons-material/SpeedRounded';
 import SsidChartRoundedIcon from '@mui/icons-material/SsidChartRounded';
-import { Button, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { Button, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import axios from 'axios';
@@ -104,7 +104,7 @@ export default function ChartController() {
 
   return (
     <div className="chart-container" style={{marginTop:"15vh"}}>
-
+<Typography variant='h4' position={'absolute'} left={750} top={-50}>Visualizations</Typography>
       
 {/* data={jsonData} */}<Card sx={{position:'relative',width:'65vw',marginLeft:'3vw', height:'80vh', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1)' }}>
         {selectedChart === 'gauge' && <Gauges  datas={assetTypeCounts}/>}
@@ -124,7 +124,7 @@ export default function ChartController() {
   onChange={handleChartChange}
   aria-label="chart type"
   orientation="vertical"
-  sx={{ width: '250px', height:"67vh", marginLeft: '.5vw' ,marginTop:'90px'}}
+  sx={{ width: '250px', height:"66.5vh", marginLeft: '.5vw' ,marginTop:'90px'}}
 >
 <ToggleButton value="gauge" sx={{ marginBottom: '40px', fontSize: '1rem',height:"8vh", color: selectedChart === 'gauge' ? 'green' : 'blue', backgroundColor: selectedChart === 'gauge' ? 'lightgreen' : 'lightblue'}}>
     <SpeedRoundedIcon sx={{ fontSize: '2rem', marginRight:"10px" }} /> Gauges

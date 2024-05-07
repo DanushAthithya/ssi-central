@@ -14,6 +14,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AddIcon from '@mui/icons-material/Add';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import ListIcon from '@mui/icons-material/List';
+import { ArrowBackIosRounded } from "@mui/icons-material";
 // import logo from './logo2.png';
 
 const logoStyle = {
@@ -62,6 +63,26 @@ function AdminNavbar({ mode, toggleColorMode }) {
           mt: 2,
         }}
       >
+        <IconButton
+          color="primary"
+          aria-label="home"
+          onClick={() => window.location.replace("/adminHome/")}
+          edge="start"
+          sx={{
+            fontSize: "1.5rem", // Adjust font size
+            position: 'absolute',
+            left: 40,
+            top: 90,
+            padding: '8px 16px', // Add padding to increase clickable area
+            borderRadius: '16px', // Add border radius to make it look like a button
+            backgroundColor: 'rgba(0, 0, 0, 0.04)', // Add background color
+            '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.08)', // Change background color on hover
+            }
+          }}
+        >
+          <ArrowBackIosRounded />
+        </IconButton>
         <Container maxWidth="lg">
           {/* Hamburger Menu */}
 

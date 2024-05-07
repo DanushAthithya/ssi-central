@@ -12,9 +12,11 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import ListIcon from '@mui/icons-material/List';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import React from "react";
+import HomeIcon from '@mui/icons-material/Home';
 
 import { Divider, Drawer, MenuItem } from "@mui/material";
 import logo from "../../Images/GenySys__2_-removebg-preview.png";
+import { ArrowBack, ArrowBackIos, ArrowBackIosRounded } from "@mui/icons-material";
 
 const logoStyle = {
   width: "140px",
@@ -66,6 +68,26 @@ function UserNavbar({ mode, toggleColorMode }) {
           mt: 2,
         }}
       >
+        <IconButton
+          color="primary"
+          aria-label="home"
+          onClick={() => window.location.replace("/userHome/")}
+          edge="start"
+          sx={{
+            fontSize: "1.5rem", // Adjust font size
+            position: 'absolute',
+            left: 40,
+            top: 90,
+            padding: '8px 16px', // Add padding to increase clickable area
+            borderRadius: '16px', // Add border radius to make it look like a button
+            backgroundColor: 'rgba(0, 0, 0, 0.04)', // Add background color
+            '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.08)', // Change background color on hover
+            }
+          }}
+        >
+          <ArrowBackIosRounded />
+        </IconButton>
         <Container maxWidth="lg">
           <Toolbar
             variant="regular"

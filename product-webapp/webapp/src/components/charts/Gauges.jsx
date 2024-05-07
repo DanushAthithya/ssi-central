@@ -15,7 +15,7 @@ export default function Gauges({datas}) {
   // const data = Object.entries(assetTypeCounts).map(([assetType, count]) => ({ assetType, count }));
   return (
     <div style={{ textAlign: 'center' , marginTop: '20px', width:'1100px'}}    id="chart-container" className="gauges-container" >
-      <Typography variant="h4">Performance Gauges</Typography>
+      <Typography variant="h5">Performance Gauges</Typography>
       {/* {assetTypeC ounts.stock} */}
       <div className='indiv-gauges-container' style={{ display: 'flex', justifyContent: 'space-around' }}>
       <GaugeWithText text="Equity" value={datas[Equity]} />
