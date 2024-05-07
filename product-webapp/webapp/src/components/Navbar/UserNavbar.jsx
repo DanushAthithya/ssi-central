@@ -5,6 +5,7 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import ListIcon from "@mui/icons-material/List";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Divider, Drawer, MenuItem } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -12,23 +13,17 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
-
-import { Divider, Drawer, MenuItem } from "@mui/material";
 import logo from "../../Images/GenySys__2_-removebg-preview.png";
-
 const logoStyle = {
   width: "140px",
   height: "auto",
   cursor: "pointer",
 };
-
 function UserNavbar({ mode, toggleColorMode }) {
   const [open, setOpen] = React.useState(false);
-
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
-
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 128;
@@ -42,11 +37,9 @@ function UserNavbar({ mode, toggleColorMode }) {
       setOpen(false);
     }
   };
-
   // Get user data from localStorage
   const user = localStorage.getItem("user");
   const userName = user ? JSON.parse(user).userName : "";
-
   // Handle logout
   const handleLogout = () => {
     // Clear user data from localStorage
@@ -54,7 +47,6 @@ function UserNavbar({ mode, toggleColorMode }) {
     // Redirect to login page
     window.location.replace("/login");
   };
-
   return (
     <div>
       <AppBar
@@ -217,5 +209,4 @@ function UserNavbar({ mode, toggleColorMode }) {
     </div>
   );
 }
-
 export default UserNavbar;

@@ -52,6 +52,8 @@ function Form() {
     counterPartyAccountNumber: false,
     beneficiaryAccountNumber: false,
     counterPartyEmail: false,
+    amount: false,
+    numberOfAsset: false
   });
 
   const handleInputChange = (e) => {
@@ -68,8 +70,14 @@ function Form() {
       errors.beneficiaryAccountNumber = true;
     } else if (name === "counterPartyEmail" && !value.includes("@")) {
       errors.counterPartyEmail = true;
-    } else {
-      errors[name] = false;
+    }
+    else if(name === "amount" && parseInt(value) < 0) {
+      errors.amount=true;
+    } else if (name === "numberOfAsset" && parseInt(value) < 0) {
+      errors.numberOfAsset=true;
+    } else{
+      // Clear validation error if value is valid
+      errors[name]=false;
     }
 
     setValidationErrors(errors);
@@ -318,22 +326,29 @@ function Form() {
                   type="number"
                   value={formData.numberOfAsset}
                   onChange={handleInputChange}
+                  error={validationErrors.numberOfAsset}
                   required
-                  sx={{ width: "50%" }} // Adjusted for equal spacing without enlarging
+                  sx={{ width: "100%" }} // Adjusted for equal spacing without enlarging
                   InputProps={{
                     style: { color: "black" },
                     inputProps: { min: 0 },
                   }} // Added min property here
                 />
+              </Box>
+              <Box sx={{ display: "flex", gap: "1vh", width: "100%" }}>
                 <TextField
                   label="Amount"
                   name="amount"
                   type="number"
                   value={formData.amount}
+                  error={validationErrors.amount}
                   onChange={handleInputChange}
                   required
                   sx={{ width: "50%" }} // Adjusted for equal spacing without enlarging
-                  InputProps={{ style: { color: "black" } ,inputProps:{min:0}}}
+                  InputProps={{
+                    style: { color: "black" },
+                    inputProps: { min: 0 },
+                  }}
                 />
                 <TextField
                   select
@@ -491,7 +506,7 @@ function Form() {
     <Container
       maxWidth="md"
       style={{
-        marginTop: "150px",
+        marginTop: "170px",
         textAlign: "center",
         border: "1px solid #ccc",
         borderRadius: "4px",
