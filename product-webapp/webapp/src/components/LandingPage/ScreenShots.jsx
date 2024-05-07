@@ -17,24 +17,18 @@ const items = [
   {
     icon: <ViewQuiltRoundedIcon />,
     title: 'Ease of Use',
-    description:
-      'This item could provide a snapshot of the most important metrics or data points related to the product.',
-    imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
+
     imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")',
   },
   {
     icon: <EdgesensorHighRoundedIcon />,
     title: 'Security',
-    description:
-      'This item could provide information about the mobile app version of the product.',
-    imageLight: 'url("/static/images/templates/templates-images/mobile-light.png")',
-    imageDark: 'url("/static/images/templates/templates-images/mobile-dark.png")',
+    imageLight: 'url("../../Images/i3.png")',
+    imageDark: 'url("../../Images/i3.png")',
   },
   {
     icon: <DevicesRoundedIcon />,
     title: 'Transparency',
-    description:
-      'This item could let users know the product is available on all platforms, such as web, mobile, and desktop.',
     imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
     imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
   },
@@ -60,10 +54,12 @@ export default function Screenshots() {
             <Typography
               variant="body1"
               color="text.secondary"
-              sx={{ mb: { xs: 2, sm: 4 } ,
-              textAlign: 'justify'}}
+              sx={{
+                mb: { xs: 2, sm: 4 },
+                textAlign: 'justify'
+              }}
             >
-              Users can easily input, store, and maintain SSIs for various financial instruments and counterparties. The platform facilitates the creation of profiles for different entities, including banks, brokers, and financial institutions, streamlining the association of SSIs with specific counterparties. 
+              Users can easily input, store, and maintain SSIs for various financial instruments and counterparties. The platform facilitates the creation of profiles for different entities, including banks, brokers, and financial institutions, streamlining the association of SSIs with specific counterparties.
             </Typography>
           </div>
           <Grid container item gap={1} sx={{ display: { xs: 'auto', sm: 'none' } }}>
@@ -254,15 +250,15 @@ export default function Screenshots() {
             <Box
               sx={{
                 m: 'auto',
-                width: 420,
+                width: 440,
                 height: 500,
                 backgroundSize: 'contain',
-                backgroundImage: (theme) =>
-                  theme.palette.mode === 'light'
-                    ? items[selectedItemIndex].imageLight
-                    : items[selectedItemIndex].imageDark,
               }}
+
             />
+            <Typography color="text.secondary"
+              variant="body2" sx={{ textAlign: 'justify', fontSize: '18px', lineHeight: '2.0', paddingRight: '20px' }}>
+              Standard Settlement Instructions (SSIs) are fundamental to the smooth functioning of financial markets and transactions. They provide a standardized format for conveying crucial information, facilitating seamless transactions by reducing the risk of errors and delays. SSIs play a crucial role in enhancing operational efficiency within financial institutions, streamlining internal processes related to trade execution, confirmation, and settlement. Additionally, they contribute to risk mitigation by ensuring accurate and timely settlement of trades, thereby minimizing exposure to financial losses. Overall, SSIs are essential in maintaining the integrity and reliability of the global financial system, enabling efficient communication and coordination between counterparties involved in various financial transactions.</Typography>
           </Card>
         </Grid>
       </Grid>

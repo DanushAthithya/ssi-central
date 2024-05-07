@@ -53,10 +53,11 @@ function Form() {
     beneficiaryAccountNumber: false,
     counterPartyEmail: false,
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-  
+
     // Perform validation
     const errors = { ...validationErrors };
     if (name === "instructionId" && !/^\d+$/.test(value)) {
@@ -67,23 +68,21 @@ function Form() {
       errors.beneficiaryAccountNumber = true;
     } else if (name === "counterPartyEmail" && !value.includes("@")) {
       errors.counterPartyEmail = true;
-    } else if (name === "amount" && parseFloat(value) < 0) { // Check if amount is negative
-      errors.amount = true;
-    } else if (name === "numberOfAsset" && parseInt(value) < 0) { // Check if number of assets is negative
-      errors.numberOfAsset = true;
     } else {
       errors[name] = false;
     }
-  
+
     setValidationErrors(errors);
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await axios.post("http://localhost:9092/api/v1/ssi/add/", formData);
+      const response = await axios.post(
+        "http://localhost:9092/api/v1/ssi/add/",
+        formData
+      );
       console.log(response.data);
       console.log(response.status);
       if (response.status === 200 || response.status === 201) {
@@ -141,7 +140,6 @@ function Form() {
                 marginBottom: "1vh",
               }}
             >
-              
               <TextField
                 label="Counter Party Account Number"
                 name="counterPartyAccountNumber"
@@ -264,16 +262,13 @@ function Form() {
               fullWidth
               InputProps={{ style: { color: "black" } }}
             >
-              {[
-                "Equity",
-                "Forex",
-                "Mutual Funds",
-                "Sovereign Gold Bonds",
-              ].map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
+              {["Equity", "Forex", "Mutual Funds", "Sovereign Gold Bonds"].map(
+                (option) => (
+                  <MenuItem key={option} value={option}>
+                    {option}
+                  </MenuItem>
+                )
+              )}
             </TextField>
           </Box>
         );
@@ -318,41 +313,28 @@ function Form() {
                   InputProps={{ style: { color: "black" } }}
                 />
                 <TextField
-  label="Number of Asset"
-  name="numberOfAsset"
-  type="number"
-  value={formData.numberOfAsset}
-  onChange={handleInputChange}
-  required
-  error={validationErrors.numberOfAsset} // Apply error style based on validation
-  sx={{ width: "100%" }}
-  InputProps={{
-    style: { color: "black" },
-    inputProps: {
-      min: 0, // Set the minimum value
-    },
-  }}
-/>
-
-              </Box>
-              <Box sx={{ display: "flex", gap: "1vh", width: "100%" }}>
-              <TextField
-  label="Amount"
-  name="amount"
-  type="number"
-  
-  value={formData.amount}
-  onChange={handleInputChange}
-  required
-  error={validationErrors.amount} // Apply error style based on validation
-  sx={{ width: "50%" }}
-  InputProps={{
-    style: { color: "black" },
-    inputProps: {
-      min: 0, // Set the minimum value
-    },
-  }}
-/>
+                  label="Number of Asset"
+                  name="numberOfAsset"
+                  type="number"
+                  value={formData.numberOfAsset}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ width: "50%" }} // Adjusted for equal spacing without enlarging
+                  InputProps={{
+                    style: { color: "black" },
+                    inputProps: { min: 0 },
+                  }} // Added min property here
+                />
+                <TextField
+                  label="Amount"
+                  name="amount"
+                  type="number"
+                  value={formData.amount}
+                  onChange={handleInputChange}
+                  required
+                  sx={{ width: "50%" }} // Adjusted for equal spacing without enlarging
+                  InputProps={{ style: { color: "black" } ,inputProps:{min:0}}}
+                />
                 <TextField
                   select
                   label="Currency Type"
@@ -505,17 +487,19 @@ function Form() {
     }
   };
 
-
   return (
-    <Container maxWidth="md" style={{
-      marginTop: '50px',
-      textAlign: 'center',
-      border: '1px solid #ccc',
-      borderRadius: '4px',
-      backgroundColor: 'white',
-      boxShadow: '0 4px 8px rgba(10,0,0,10)',
-      padding: '20px'
-    }}>
+    <Container
+      maxWidth="md"
+      style={{
+        marginTop: "150px",
+        textAlign: "center",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        backgroundColor: "white",
+        boxShadow: "0 4px 8px rgba(10,0,0,10)", // Adjusted the opacity for the shadow
+        padding: "20px",
+      }}
+    >
       <div className="Form">
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
@@ -524,16 +508,32 @@ function Form() {
             </Step>
           ))}
         </Stepper>
-        <form>
+        <form onSubmit={handleSubmit}>
           {stepContent(activeStep)}
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button color="primary" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>Back</Button>
-            <Box sx={{ flex: '1 1 auto' }} />
-            {activeStep < steps.length - 1 && (
-              <Button onClick={handleNext} color="primary">
-                Next
-              </Button>
-            )}
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+            <Button
+              color="primary"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
+              Back
+            </Button>
+            <Box sx={{ flex: "1 1 auto" }} />
+            <Button
+              disabled={activeStep === steps.length - 1}
+              onClick={handleNext}
+              color="primary"
+            >
+              Next
+            </Button>
+            <Button
+              disabled={activeStep !== steps.length - 1}
+              type="submit"
+              color="primary"
+            >
+              Finish
+            </Button>
           </Box>
         </form>
       </div>
