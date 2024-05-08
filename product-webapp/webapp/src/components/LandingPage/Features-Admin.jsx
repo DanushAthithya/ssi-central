@@ -9,13 +9,13 @@ import * as React from 'react';
 
 const items = [
   {
-    icon: <AddRounded  sx={{ fontSize: '2rem' }} />,
+    icon: <AddRounded  sx={{ fontSize: '2.5rem' }} />,
     title: 'Add User',
     onClick:() => window.location.replace("/adminHome/createUser"), 
   },
   
   {
-    icon: <ViewList  sx={{ fontSize: '2rem' }} />,
+    icon: <ViewList  sx={{ fontSize: '2.5rem' }} />,
     title: 'User List',
     onClick:() => window.location.replace("/adminHome/userFilter"), 
   },
@@ -54,7 +54,7 @@ export default function FeaturesAdmin() {
 
           </Typography>
         </Box>
-        <Grid container spacing={10} marginBottom={7}>
+        <Grid container spacing={12} marginBottom={7} justifyContent="center">
           {items.map((item, index) => (
             <Grid item xs={12} sm={6} md={4} key={index} marginBottom={30}>
               <Stack

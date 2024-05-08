@@ -21,7 +21,7 @@ const UpdateSSIListHome = () => {
         backgroundRepeat: 'no-repeat',
       })}
     >
-       <div style={{position:"absolute", top:"13vh",right:"45vw",fontSize:"40px"}}>List SSI</div>
+       <div style={{position:"absolute", top:"10vh",right:"45vw",fontSize:"40px"}}>List SSI</div>
         <UserNavbar />
         <SSIList/>
       </Box>

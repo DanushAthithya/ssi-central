@@ -19,7 +19,7 @@ public class ApiGatewayApplication {
 		return builder.routes()
 				.route(r->r.path("/authorization/**").uri("lb://AUTHORIZATION"))
 				.route(r->r.path("/user-service/**").uri("lb://USER_SERVICE"))
-				.route(r->r.path("/productwebapp/**").uri("lb://PRODUCT_WEBAPP"))
+				.route(r->r.path("/product-webapp/**").uri("lb://PRODUCT_WEBAPP"))
 				.route(r->r.path("/ssi-management/**").uri("lb://SSI_MANAGEMENT"))
 				.build();
 	}

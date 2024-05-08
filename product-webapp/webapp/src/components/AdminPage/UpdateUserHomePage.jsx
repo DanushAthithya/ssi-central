@@ -21,7 +21,7 @@ const UpdateUserHomePage = () => {
         backgroundRepeat: 'no-repeat',
       })}
     >
-       <div style={{position:"absolute", top:"13vh",right:"45vw",fontSize:"40px"}}>Update User</div>
+       {/* <div style={{position:"absolute", top:"13vh",right:"45vw",fontSize:"40px"}}>Update User</div> */}
         <AdminNavbar />
         <UpdateUser />
       </Box>

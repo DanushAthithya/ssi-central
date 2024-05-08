@@ -5,6 +5,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -82,6 +83,9 @@ const response = await axios.put(
             borderRadius: 5,
           }}
         >
+          <Typography component="h1" variant="h4">
+              Update User 
+            </Typography>
           <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
             <ManageAccountsRoundedIcon />
           </Avatar>

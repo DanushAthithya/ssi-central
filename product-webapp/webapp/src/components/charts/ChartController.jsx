@@ -104,9 +104,9 @@ export default function ChartController() {
 
   return (
     <div className="chart-container" style={{marginTop:"15vh"}}>
-<Typography variant='h4' position={'absolute'} left={750} top={-50}>Visualizations</Typography>
+<Typography variant='h4' position={'absolute'} left={750} top={-40}>Visualizations</Typography>
       
-{/* data={jsonData} */}<Card sx={{position:'relative',width:'65vw',marginLeft:'3vw', height:'80vh', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1)' }}>
+{/* data={jsonData} */}<Card sx={{position:'relative',width:'65vw',marginLeft:'3vw', height:'78vh',marginTop:'15px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1)' }}>
         {selectedChart === 'gauge' && <Gauges  datas={assetTypeCounts}/>}
         {selectedChart === 'bar' && <Visualize datas={monthlyAssetCounts}/>}
         {selectedChart === 'line' && <LineCharts datas={monthlyAssetCounts}/>}
@@ -114,7 +114,7 @@ export default function ChartController() {
         </Card>
       {/* </div> */}
       <div className="chart-card">
-        <Card sx={{  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1)' }}>
+        <Card sx={{  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1)',marginTop:'15px' }}>
           <CardContent>
             {/* <Typography variant="h6" className="card-title">Select Chart</Typography> */}
             <div className="chart-options">
@@ -124,7 +124,7 @@ export default function ChartController() {
   onChange={handleChartChange}
   aria-label="chart type"
   orientation="vertical"
-  sx={{ width: '250px', height:"66.5vh", marginLeft: '.5vw' ,marginTop:'90px'}}
+  sx={{ width: '250px', height:"65vh", marginLeft: '.5vw' ,marginTop:'75px'}}
 >
 <ToggleButton value="gauge" sx={{ marginBottom: '40px', fontSize: '1rem',height:"8vh", color: selectedChart === 'gauge' ? 'green' : 'blue', backgroundColor: selectedChart === 'gauge' ? 'lightgreen' : 'lightblue'}}>
     <SpeedRoundedIcon sx={{ fontSize: '2rem', marginRight:"10px" }} /> Gauges

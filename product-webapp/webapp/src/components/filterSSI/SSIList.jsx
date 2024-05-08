@@ -488,6 +488,7 @@ const SSIList = () => {
             </Button>
             <Button
               variant="contained"
+              color="warning"
               onClick={()=>{window.location.reload()}}
               fullWidth
               sx={{ mb: 3 }}

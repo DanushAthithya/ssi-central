@@ -9,19 +9,19 @@ import Typography from '@mui/material/Typography';
 import * as React from 'react';
 const items = [
   {
-    icon: <AddRounded sx={{ fontSize: '2rem' }}/>,
+    icon: <AddRounded sx={{ fontSize: '2.5rem' }}/>,
     title: 'Generate SSI',
     // description: 'Option 1 description',
     onClick:() => window.location.replace("/userHome/createSSI"), 
   },
   {
-    icon: <ViewList sx={{ fontSize: '2rem' }}/>,
+    icon: <ViewList sx={{ fontSize: '2.5rem' }}/>,
     title: 'SSI List',
     // description: 'Option 3 description',
     onClick:() => window.location.replace("/userHome/ssiFilter"), // Example click handler
   },
   {
-    icon: <BarChartIcon sx={{ fontSize: '2rem' }}/>,
+    icon: <BarChartIcon sx={{ fontSize: '2.5rem' }}/>,
     title: 'Visualization',
     // description: 'Option 4 description',
     onClick:() => window.location.replace("/userHome/visualization"), // Example click handler
@@ -61,7 +61,7 @@ export default function FeaturesUser() {
             
           </Typography>
         </Box>
-        <Grid container spacing={5} marginBottom={30}>
+        <Grid container spacing={40} marginBottom={30} marginRight={35} justifyContent="center">
           {items.map((item, index) => (
             <Grid item xs={12} sm={6} md={3} key={index} marginTop={10}>
               <Stack
@@ -79,6 +79,7 @@ export default function FeaturesUser() {
                   backgroundColor: 'grey.900',
                   marginBottom:"20px",
                   borderRadius: '36px', 
+                  width:'14vw',
                   cursor: 'pointer', // Add cursor pointer for clickable effect
                 }}
                 onClick={item.onClick} // Assign onClick handler

@@ -21,7 +21,7 @@ const CreateUserHomePage = () => {
         backgroundRepeat: 'no-repeat',
       })}
     >
-       <div style={{position:"absolute", top:"13vh",right:"45vw",fontSize:"40px"}}>Create User</div>
+       <div style={{position:"absolute", top:"13vh",right:"44vw",fontSize:"40px"}}>Create User</div>
         <AdminNavbar />
         <CreateUser />
       </Box>
