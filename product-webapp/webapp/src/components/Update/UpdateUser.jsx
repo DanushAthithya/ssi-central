@@ -130,6 +130,7 @@ const response = await axios.put(
                   type="email"
                   id="email"
                   autoComplete="email"
+                  onChange={handleChange}
                   value={formData.emailId}
                 />
               </Grid>

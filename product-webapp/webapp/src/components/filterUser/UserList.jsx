@@ -31,7 +31,12 @@ function UserList() {
 
   const handleDelete = async (empId) => {
     try {
-      const response = await axios.delete(`http://localhost:9090/api/v1/user/${empId}`);
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(`http://localhost:9090/api/v1/user/${empId}`,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       console.log(response.data);
       window.location.reload();
     } catch (error) {
